@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray_head"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg_forms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_forms_summary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cs_dp_48"
+                android:background="@drawable/btn_radio_selector"
+                android:button="@null"
+                android:checked="true"
+                android:drawablePadding="@dimen/cs_dp_20"
+                android:drawableRight="@mipmap/ic_right"
+                android:paddingLeft="@dimen/cs_dp_20"
+                android:paddingRight="@dimen/cs_dp_20"
+                android:text="@string/forms_cashier_summary"
+                android:textSize="@dimen/cs_sp_16"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_forms_analysis"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cs_dp_48"
+                android:background="@drawable/btn_radio_selector"
+                android:button="@null"
+                android:drawablePadding="@dimen/cs_dp_20"
+                android:drawableRight="@mipmap/ic_right"
+                android:paddingLeft="@dimen/cs_dp_20"
+                android:text="@string/forms_operation_analysis"
+                android:textSize="@dimen/cs_sp_16"
+                android:paddingRight="@dimen/cs_dp_20"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_forms_rang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cs_dp_48"
+                android:background="@drawable/btn_radio_selector"
+                android:button="@null"
+                android:drawablePadding="@dimen/cs_dp_20"
+                android:drawableRight="@mipmap/ic_right"
+                android:paddingLeft="@dimen/cs_dp_20"
+                android:text="@string/forms_sales_rang"
+                android:textSize="@dimen/cs_sp_16"
+                android:paddingRight="@dimen/cs_dp_20"
+                />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_forms_fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/gray_content">
+
+    </FrameLayout>
+
+</LinearLayout>

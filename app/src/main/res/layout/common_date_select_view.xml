@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="@string/order_date_select"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/cs_dp_10"
+        android:text="@string/order_date_begin"/>
+
+    <!--开始日期可点击-->
+    <TextView
+        android:id="@+id/tv_date_select_begin"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="@dimen/cs_dp_36"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:background="@drawable/bg_goods_item"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/cs_dp_10"
+        android:text="@string/order_date_end"/>
+
+    <!--结束日期可点击-->
+    <TextView
+        android:id="@+id/tv_date_select_end"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="@dimen/cs_dp_36"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/white"
+        android:gravity="center"/>
+</merge>

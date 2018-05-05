@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_member_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cs_dp_60">
+
+    <ImageView
+        android:id="@+id/iv_member"
+        android:layout_width="@dimen/cs_dp_60"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scaleType="center"
+        android:src="@mipmap/member_ic_man"
+        />
+
+    <TextView
+        android:id="@+id/tv_member_phone_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/cs_dp_5"
+        android:layout_marginTop="@dimen/cs_dp_5"
+        android:layout_toRightOf="@+id/iv_member"
+        android:text="15521291341"
+        android:textSize="@dimen/cs_sp_14"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tv_member_name_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_member_phone_item"
+        android:layout_toRightOf="@+id/iv_member"
+        android:text="小芳"
+        android:textSize="@dimen/cs_sp_12"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cs_dp_001"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/cs_dp_60"
+        android:layout_marginRight="@dimen/cs_dp_10"
+        android:layout_marginTop="@dimen/cs_dp_5"
+        android:background="@color/gray_line"/>
+</RelativeLayout>

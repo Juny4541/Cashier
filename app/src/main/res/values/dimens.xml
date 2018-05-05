@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--dp-->
+    <dimen name="cs_dp_001">0.01dp</dimen>
+    <dimen name="cs_dp_01">0.1dp</dimen>
+    <dimen name="cs_dp_5">5dp</dimen>
+    <dimen name="cs_dp_10">10dp</dimen>
+    <dimen name="cs_dp_20">20dp</dimen>
+    <dimen name="cs_dp_25">25dp</dimen>
+    <dimen name="cs_dp_30">30dp</dimen>
+    <dimen name="cs_dp_36">36dp</dimen>
+    <dimen name="cs_dp_48">48dp</dimen>
+    <dimen name="cs_dp_50">50dp</dimen>
+    <dimen name="cs_dp_60">60dp</dimen>
+    <dimen name="cs_dp_100">100dp</dimen>
+    <dimen name="cs_dp_120">120dp</dimen>
+    <dimen name="cs_dp_150">150dp</dimen>
+    <dimen name="cs_dp_200">200dp</dimen>
+    <dimen name="cs_dp_250">250dp</dimen>
+    <dimen name="cs_dp_300">300dp</dimen>
+
+    <!--sp-->
+    <dimen name="cs_sp_12">12sp</dimen>
+    <dimen name="cs_sp_14">14sp</dimen>
+    <dimen name="cs_sp_16">16sp</dimen>
+    <dimen name="cs_sp_20">20sp</dimen>
+    <dimen name="cs_sp_25">25sp</dimen>
+</resources>

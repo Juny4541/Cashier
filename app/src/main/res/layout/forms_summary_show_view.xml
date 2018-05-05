@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_sum_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="@dimen/cs_dp_10"
+        android:text="100"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/cs_sp_20"
+        />
+
+    <TextView
+        android:id="@+id/tv_explain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/cs_dp_20"
+        android:drawablePadding="@dimen/cs_dp_5"
+        android:text="支付宝"
+        android:textSize="@dimen/cs_sp_12"/>
+</merge>

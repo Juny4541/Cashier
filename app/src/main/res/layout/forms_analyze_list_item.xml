@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_table_tab"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/cs_dp_36"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_forms_analyze_date"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/order_date"/>
+
+    <TextView
+        android:id="@+id/tv_forms_analyze_sum"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/forms_saleroom"
+        />
+
+    <TextView
+        android:id="@+id/tv_forms_analyze_count"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/forms_order_quantity"/>
+</LinearLayout>

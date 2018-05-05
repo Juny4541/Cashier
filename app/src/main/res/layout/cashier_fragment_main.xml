@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <!--订单详情-->
+    <com.juny.cashiersystem.widget.OrderDetailListView
+        android:id="@+id/ol_cashier_order_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray_head"
+        />
+
+    <!--分割线-->
+    <View
+        android:layout_width="@dimen/cs_dp_001"
+        android:layout_height="match_parent"
+        android:background="@color/gray_line"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/gray_content"
+        android:orientation="vertical">
+
+        <!--顶部的tab-->
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rv_cashier_category_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:scrollbars="horizontal"/>
+
+        <!--分割线-->
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_001"
+            android:layout_below="@+id/rv_cashier_category_list"
+            android:background="@color/gray_line"/>
+
+        <!--商品列表-->
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rv_cashier_goods_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_line"
+            />
+
+        <ImageView
+            android:id="@+id/iv_cashier_add_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/cs_dp_50"
+            android:padding="5dp"
+            android:src="@mipmap/cashier_add_goods"
+            />
+    </RelativeLayout>
+</LinearLayout>

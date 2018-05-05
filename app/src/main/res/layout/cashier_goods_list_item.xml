@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.juny.cashiersystem.widget.SquareFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    android:background="@drawable/bg_goods_item">
+
+    <TextView
+        android:id="@+id/tv_goods_inventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:padding="5dp"
+        android:text="12"
+        android:textSize="@dimen/cs_sp_14"/>
+
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/cs_dp_10"
+        android:padding="5dp"
+        android:text="苹果"
+        android:textSize="@dimen/cs_sp_16"
+        />
+
+    <TextView
+        android:id="@+id/tv_goods_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:padding="5dp"
+        android:text="￥ 230"
+        android:textSize="14sp"/>
+
+</com.juny.cashiersystem.widget.SquareFrameLayout>

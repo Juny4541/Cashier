@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <!--收银设置-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray_head"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/cs_dp_20"
+            android:text="@string/setting_cashier"
+            android:textSize="@dimen/cs_sp_20"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/cs_dp_20"
+            android:background="@android:color/white"
+            android:scaleType="centerInside"
+            android:src="@mipmap/setting_ic_photo_add"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:gravity="center"
+            android:text="@string/setting_upload_wechat_code"
+            android:textSize="@dimen/cs_sp_16"
+            />
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/cs_dp_20"
+            android:background="@android:color/white"
+            android:scaleType="centerInside"
+            android:src="@mipmap/setting_ic_photo_add"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:gravity="center"
+            android:text="@string/setting_upload_zfb_code"
+            android:textSize="@dimen/cs_sp_16"
+            />
+
+    </LinearLayout>
+
+    <!--打印设置-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/gray_content">
+
+        <TextView
+            android:id="@+id/tv_setting_print"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/cs_dp_20"
+            android:text="@string/setting_print"
+            android:textSize="@dimen/cs_sp_20"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_setting_connected"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:layout_below="@+id/tv_setting_print"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/cs_dp_20"
+            android:text="@string/setting_print_connected"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/cs_sp_16"/>
+
+        <FrameLayout
+            android:id="@+id/fl_setting_connected"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_below="@+id/tv_setting_connected"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/cs_dp_30"
+                android:paddingRight="@dimen/cs_dp_30"
+                android:text="打印机"
+                android:textSize="@dimen/cs_sp_14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="@dimen/cs_dp_30"
+                android:paddingRight="@dimen/cs_dp_30"
+                android:text="已连接"
+                android:textSize="@dimen/cs_sp_12"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_setting_usable_device"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_60"
+            android:layout_below="@+id/fl_setting_connected"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/cs_dp_20"
+            android:text="@string/setting_usable_device"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/cs_sp_16"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_below="@+id/tv_setting_usable_device"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/cs_dp_30"
+                android:paddingRight="@dimen/cs_dp_30"
+                android:text="L5"
+                android:textSize="@dimen/cs_sp_14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="@dimen/cs_dp_30"
+                android:paddingRight="@dimen/cs_dp_30"
+                android:text="@string/setting_connected"
+                android:textSize="@dimen/cs_sp_12"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="@dimen/cs_dp_150"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/cs_dp_50"
+            android:background="@drawable/bg_round_white"
+            android:drawableTop="@mipmap/setting_ic_search"
+            android:gravity="center"
+            android:padding="@dimen/cs_dp_10"
+            android:text="@string/com_search"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

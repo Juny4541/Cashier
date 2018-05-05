@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.juny.cashiersystem.business.loginreg.LoginActivity">
+
+    <com.juny.cashiersystem.widget.TitleBarCommon
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="60dp"
+        android:text="简易收银系统"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/login_name_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/login_psd_edit"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:drawableLeft="@mipmap/ic_login_user"
+        android:hint="   用户名" />
+
+    <EditText
+        android:id="@+id/login_psd_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:drawableLeft="@mipmap/ic_login_lock"
+        android:hint="   密码" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/login_psd_edit"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_normal_btn"
+        android:text="登录"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/login_register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_btn"
+        android:layout_below="@+id/login_btn"
+        android:layout_marginTop="5dp"
+        android:padding="6dp"
+        android:text="还未注册？"
+        android:textColor="@color/blue" />
+
+    <TextView
+        android:id="@+id/login_lose_psd_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/login_btn"
+        android:layout_below="@+id/login_btn"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:text="忘记密码？"
+        android:textColor="@color/blue" />
+
+</RelativeLayout>

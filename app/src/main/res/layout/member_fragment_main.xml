@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray_head">
+
+        <EditText
+            android:id="@+id/et_member_search"
+            android:layout_width="@dimen/cs_dp_200"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_marginLeft="@dimen/cs_dp_20"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@mipmap/ic_search"
+            android:drawablePadding="@dimen/cs_dp_10"
+            android:gravity="center_vertical"
+            android:hint="@string/com_search"
+            android:paddingLeft="@dimen/cs_dp_10"
+            android:textSize="@dimen/cs_sp_14"
+            />
+
+        <ImageView
+            android:id="@+id/iv_member_add"
+            android:layout_width="@dimen/cs_dp_50"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/cs_dp_20"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_search"
+            android:padding="@dimen/cs_dp_5"
+            android:src="@mipmap/ic_add"
+            />
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rv_member_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cs_dp_60"/>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/gray_content"
+        android:padding="@dimen/cs_dp_20">
+
+        <RelativeLayout
+            android:layout_width="@dimen/cs_dp_150"
+            android:layout_height="@dimen/cs_dp_150"
+            android:layout_marginLeft="@dimen/cs_dp_20"
+            android:layout_marginTop="@dimen/cs_dp_10"
+            android:background="@drawable/bg_round_red">
+
+            <TextView
+                android:id="@+id/tv_member_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/cs_dp_30"
+                android:paddingBottom="@dimen/cs_dp_5"
+                android:text="￥ 52024"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/cs_sp_25"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_member_balance_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_member_balance"
+                android:layout_centerInParent="true"
+                android:text="余额"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/cs_sp_16"
+                />
+
+            <View
+                android:id="@+id/view_line_one"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cs_dp_01"
+                android:layout_below="@+id/tv_member_balance_text"
+                android:layout_marginBottom="@dimen/cs_dp_5"
+                android:layout_marginLeft="@dimen/cs_dp_20"
+                android:layout_marginRight="@dimen/cs_dp_20"
+                android:layout_marginTop="@dimen/cs_dp_5"
+                android:background="#f5f5f5"/>
+
+            <TextView
+                android:id="@+id/tv_member_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_line_one"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/cs_dp_5"
+                android:text="编辑"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/cs_sp_14"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_member_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_50"
+            android:layout_marginLeft="@dimen/cs_dp_200"
+            android:layout_marginRight="@dimen/cs_dp_50"
+            android:layout_marginTop="@dimen/cs_dp_10"
+            android:drawableLeft="@mipmap/member_ic_phone"
+            android:gravity="right|center_vertical"
+            android:text="1251523456486"
+            android:textSize="@dimen/cs_sp_20"
+            />
+
+        <TextView
+            android:id="@+id/tv_member_card_num"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_50"
+            android:layout_below="@+id/tv_member_phone"
+            android:layout_marginLeft="@dimen/cs_dp_200"
+            android:layout_marginRight="@dimen/cs_dp_50"
+            android:drawableLeft="@mipmap/member_ic_card"
+            android:gravity="right|center_vertical"
+            android:text="156455"
+            android:textSize="@dimen/cs_sp_20"
+            />
+
+        <TextView
+            android:id="@+id/tv_member_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_50"
+            android:layout_below="@+id/tv_member_card_num"
+            android:layout_marginLeft="@dimen/cs_dp_200"
+            android:layout_marginRight="@dimen/cs_dp_50"
+            android:drawableLeft="@mipmap/member_ic_man"
+            android:gravity="right|center_vertical"
+            android:text="小芳"
+            android:textSize="@dimen/cs_sp_20"
+            />
+
+        <View
+            android:id="@+id/view_line_two"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_001"
+            android:layout_below="@+id/tv_member_name"
+            android:layout_marginLeft="@dimen/cs_dp_50"
+            android:layout_marginRight="@dimen/cs_dp_50"
+            android:layout_marginTop="@dimen/cs_dp_50"
+            android:background="@color/gray_line"/>
+
+        <com.juny.cashiersystem.widget.FormsSummaryView
+            android:id="@+id/view_member_total_pay"
+            android:layout_width="@dimen/cs_dp_250"
+            android:layout_height="@dimen/cs_dp_250"
+            android:layout_below="@+id/view_line_two"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="@dimen/cs_dp_30"
+            />
+
+        <com.juny.cashiersystem.widget.FormsSummaryView
+            android:id="@+id/view_member_total_buy"
+            android:layout_width="@dimen/cs_dp_200"
+            android:layout_height="@dimen/cs_dp_200"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/view_line_two"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="@dimen/cs_dp_30"
+            />
+
+        <TextView
+            android:id="@+id/tv_member_record_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="70dp"
+            android:layout_marginLeft="@dimen/cs_dp_50"
+            android:drawablePadding="@dimen/cs_dp_10"
+            android:drawableTop="@mipmap/member_ic_buy"
+            android:text="@string/member_bug_record"
+            android:textSize="@dimen/cs_dp_20"
+            />
+
+        <TextView
+            android:id="@+id/tv_member_record_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="70dp"
+            android:drawablePadding="@dimen/cs_dp_10"
+            android:drawableTop="@mipmap/member_ic_order"
+            android:text="@string/member_order_record"
+            android:textSize="@dimen/cs_dp_20"
+            />
+
+        <TextView
+            android:id="@+id/tv_member_record_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="70dp"
+            android:layout_marginRight="@dimen/cs_dp_50"
+            android:drawablePadding="@dimen/cs_dp_10"
+            android:drawableTop="@mipmap/member_ic_pay"
+            android:text="@string/member_pay_record"
+            android:textSize="@dimen/cs_dp_20"
+            />
+
+    </RelativeLayout>
+</LinearLayout>

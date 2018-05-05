@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/cs_dp_20">
+
+    <!--汇总-->
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_sum_count"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="@dimen/cs_dp_20"
+        />
+
+    <View
+        android:id="@+id/view_line_one"
+        android:layout_width="@dimen/cs_dp_250"
+        android:layout_height="4dp"
+        android:layout_below="@+id/fl_sum_count"
+        android:background="@drawable/bg_line_one"/>
+
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_sum_cash"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="@dimen/cs_dp_20"
+        />
+
+    <View
+        android:layout_width="@dimen/cs_dp_250"
+        android:layout_height="4dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fl_sum_cash"
+        android:background="@drawable/bg_line_two"
+        />
+
+    <!--支付方式汇总-->
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_pay_cash"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_line_one"
+        android:layout_marginLeft="@dimen/cs_dp_100"
+        android:layout_marginTop="@dimen/cs_dp_50"
+        />
+
+    <View
+        android:id="@+id/view_line_two"
+        android:layout_width="@dimen/cs_dp_150"
+        android:layout_height="2dp"
+        android:layout_below="@+id/fl_pay_cash"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="@dimen/cs_dp_5"
+        android:background="@drawable/bg_line_three"/>
+
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_pay_member_card"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/view_line_one"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/cs_dp_100"
+        android:layout_marginTop="@dimen/cs_dp_50"
+        />
+
+    <View
+        android:layout_width="@dimen/cs_dp_150"
+        android:layout_height="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fl_pay_member_card"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="@dimen/cs_dp_10"
+        android:background="@drawable/bg_line_fore"
+        />
+
+
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_pay_zfb"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_line_two"
+        android:layout_marginLeft="@dimen/cs_dp_100"
+        android:layout_marginTop="@dimen/cs_dp_30"
+        />
+
+    <com.juny.cashiersystem.widget.FormsSummaryView
+        android:id="@+id/fl_pay_wechat"
+        android:layout_width="@dimen/cs_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/view_line_two"
+        android:layout_marginRight="@dimen/cs_dp_100"
+        android:layout_marginTop="@dimen/cs_dp_30"
+        />
+</RelativeLayout>

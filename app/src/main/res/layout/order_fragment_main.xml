@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <!--订单详情-->
+    <com.juny.cashiersystem.widget.OrderDetailListView
+        android:id="@+id/ol_order_detail_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray_head"/>
+
+    <!--分割线-->
+    <View
+        android:layout_width="@dimen/cs_dp_01"
+        android:layout_height="match_parent"
+        android:background="@color/gray_line"/>
+
+    <!--订单列表-->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:background="@color/gray_content">
+
+        <!--日期范围-->
+        <com.juny.cashiersystem.widget.DateSelectView
+            android:id="@+id/dl_order_view"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/cs_dp_60"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/cs_dp_20"
+            android:orientation="horizontal"
+            />
+
+        <EditText
+            android:layout_width="@dimen/cs_dp_200"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_marginLeft="@dimen/cs_dp_20"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@mipmap/ic_search"
+            android:drawablePadding="@dimen/cs_dp_10"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/cs_dp_10"
+            />
+
+        <!--订单列表头-->
+        <LinearLayout
+            android:id="@+id/ll_table_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cs_dp_36"
+            android:layout_marginTop="@dimen/cs_dp_60"
+            android:background="@color/light_them_red"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/order_date"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cashier_order_num"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/order_money"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cashier_order_member"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cashier_order_remark"/>
+        </LinearLayout>
+
+        <!--订单列表-->
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/rv_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="96dp"
+            app:layout_empty="@layout/common_empty_view"
+            app:recyclerClipToPadding="true"
+            app:scrollbarStyle="insideOverlay"/>
+
+    </FrameLayout>
+
+</LinearLayout>

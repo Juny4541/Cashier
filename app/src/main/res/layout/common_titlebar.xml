@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/theme_red">
+
+    <!-- 左侧按钮 -->
+    <TextView
+        android:id="@+id/left_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minWidth="40dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textColor="@android:color/white"
+        android:textSize="13sp" />
+
+    <!-- 左侧按钮上的红点提示 -->
+    <ImageView
+        android:id="@+id/left_dot_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/left_text"
+        android:layout_alignTop="@+id/left_text"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
+
+    <!-- 中间标题 -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxWidth="148dp"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <!-- 右侧按钮 -->
+    <TextView
+        android:id="@+id/right_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:minWidth="40dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/right_dot_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/right_text"
+        android:layout_alignTop="@+id/right_text"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
+</RelativeLayout>
