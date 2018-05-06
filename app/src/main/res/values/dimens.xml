@@ -23,6 +23,7 @@
     <dimen name="cs_sp_12">12sp</dimen>
     <dimen name="cs_sp_14">14sp</dimen>
     <dimen name="cs_sp_16">16sp</dimen>
+    <dimen name="cs_sp_18">18sp</dimen>
     <dimen name="cs_sp_20">20sp</dimen>
     <dimen name="cs_sp_25">25sp</dimen>
 </resources>

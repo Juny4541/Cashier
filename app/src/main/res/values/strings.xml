@@ -15,6 +15,20 @@
     <string name="cashier_order_remark">备注</string>
     <string name="cashier_order_complete">马上结算</string>
 
+    <!--结算对话框-->
+    <string name="cashier_pay">结算</string>
+    <string name="cashier_pay_sum">合计收款：</string>
+    <string name="cashier_pay_num">订单号：</string>
+    <string name="cashier_pay_remark">备注：</string>
+    <string name="cashier_pay_type">支付方式</string>
+    <string name="cashier_pay_type_cashier">现金</string>
+    <string name="cashier_pay_type_zfb">支付宝</string>
+    <string name="cashier_pay_type_wechat">微信</string>
+    <string name="cashier_pay_type_card">会员卡</string>
+    <string name="cashier_pay_type_other">其他</string>
+    <string name="cashier_pay_ok">完成</string>
+
+
     <!--订单-->
     <string name="order_date_select">日期:</string>
     <string name="order_date_begin">从</string>
@@ -57,7 +71,7 @@
     <string name="setting_print_connected">已连接的设备：</string>
     <string name="setting_print_search_device">搜索设备</string>
     <string name="setting_connected">已连接</string>
-    <string name="setting_usable_device">可用设备：</string>
+    <string name="setting_usable_device">已配对设备：</string>
 
     <!--common-->
     <string name="com_list_empty">空空如也！</string>

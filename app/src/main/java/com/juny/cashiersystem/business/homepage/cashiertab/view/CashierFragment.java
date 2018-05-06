@@ -1,5 +1,6 @@
 package com.juny.cashiersystem.business.homepage.cashiertab.view;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -46,6 +47,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
 
     CashierPresenter mCashierPresenter;
     private CategoryListAdapter mCategoryAdapter;
+    private GoodsListAdapter mGoodsListAdapter;
 
     private List<CategoryBean> mCategoryList;
     /***记录顶部分类tab的选中位置，默认是第一个选中***/
@@ -74,6 +76,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         mCategoryAdapter.addAll(mCategoryList);
         mRvCategoryList.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         mRvCategoryList.setAdapter(mCategoryAdapter);
+
         mCategoryAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -92,18 +95,29 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
             }
         });
 
-        // 商品列表
-        GoodsListAdapter goodsAdapter = new GoodsListAdapter(mActivity);
-        goodsAdapter.addAll(generateGoodsList());
-        mRvGoodsList.setLayoutManager(new GridLayoutManager(mActivity, 6));
-        mRvGoodsList.setAdapter(goodsAdapter);
 
+        // 商品列表
+         mGoodsListAdapter = new GoodsListAdapter(mActivity);
+        mGoodsListAdapter.addAll(generateGoodsList());
+        mRvGoodsList.setLayoutManager(new GridLayoutManager(mActivity, 6));
+        mRvGoodsList.setAdapter(mGoodsListAdapter);
         // 每个item之间的空间间隔
-        SpaceDecoration itemDecorationSpace = new SpaceDecoration(UiUtil.dp2px(2));//params is height
-        itemDecorationSpace.setPaddingEdgeSide(true);//whether add space for left and right adge.default is true.
-        itemDecorationSpace.setPaddingStart(true);//whether add top space for the first line item(exclude header).default is true.
-        itemDecorationSpace.setPaddingHeaderFooter(false);//whether add space for header and footer.default is false.
+        SpaceDecoration itemDecorationSpace = new SpaceDecoration(UiUtil.dp2px(2));
+        itemDecorationSpace.setPaddingEdgeSide(true);
+        itemDecorationSpace.setPaddingStart(true);
+        itemDecorationSpace.setPaddingHeaderFooter(false);
         mRvGoodsList.addItemDecoration(itemDecorationSpace);
+
+        mGoodsListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), CashierPayActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override

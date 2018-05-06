@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CashierSystem.iml" filepath="$PROJECT_DIR$/CashierSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cashier.iml" filepath="$PROJECT_DIR$/Cashier.iml" />
+      <module fileurl="file://D:\android_myproject\Cashier\CashierSystem.iml" filepath="D:\android_myproject\Cashier\CashierSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
