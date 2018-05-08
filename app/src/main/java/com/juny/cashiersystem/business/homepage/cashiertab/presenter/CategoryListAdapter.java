@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.bean.CategoryBean;
+import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryFootViewHolder;
 import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryViewHolder;
 

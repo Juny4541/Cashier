@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.bean.OrderBean;
+import com.juny.cashiersystem.realm.bean.OrderBean;
 import com.juny.cashiersystem.business.homepage.ordertab.view.OrderListViewHolder;
 
 /**

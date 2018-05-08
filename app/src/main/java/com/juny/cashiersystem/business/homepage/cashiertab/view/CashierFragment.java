@@ -11,8 +11,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.base.AbstractCSFragment;
-import com.juny.cashiersystem.bean.CategoryBean;
-import com.juny.cashiersystem.bean.GoodsBean;
+import com.juny.cashiersystem.realm.bean.CategoryBean;
+import com.juny.cashiersystem.realm.bean.GoodsBean;
 import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierContract;
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CashierPresenter;
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CategoryListAdapter;
@@ -132,7 +132,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         ArrayList<GoodsBean> goodsList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             GoodsBean goodsBean = new GoodsBean();
-            goodsBean.setGoodsID(String.valueOf(i));
+            goodsBean.setId(i);
             goodsBean.setName("苹果");
             goodsBean.setPrice(230);
             goodsBean.setInventory(12);
@@ -148,7 +148,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         ArrayList<CategoryBean> categoryList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             CategoryBean categoryBean = new CategoryBean();
-            categoryBean.setCategoryID(String.valueOf(i));
+            categoryBean.setId(i);
             categoryBean.setCategoryName("水果");
             if (i == 0) {
                 categoryBean.setSelect(true); // 默认第一个选中

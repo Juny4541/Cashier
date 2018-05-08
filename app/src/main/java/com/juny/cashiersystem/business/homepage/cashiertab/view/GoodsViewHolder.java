@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.bean.GoodsBean;
+import com.juny.cashiersystem.realm.bean.GoodsBean;
 
 /**
  * <br> ClassName:   CashierFragment

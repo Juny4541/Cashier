@@ -17,9 +17,7 @@ import android.widget.Toast;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.bean.OrderBean;
-
-import java.util.ArrayList;
+import com.juny.cashiersystem.realm.bean.OrderBean;
 
 /**
  * 订单详情
@@ -62,7 +60,7 @@ public class OrderDetailListView extends LinearLayout {
 
         mOrderRecycler.setLayoutManager(new LinearLayoutManager(context));
         mOrderDetailAdapter = new OrderDetailAdapter(getContext());
-        mOrderDetailAdapter.addAll(generateList());
+//        mOrderDetailAdapter.addAll(generateList());
         mOrderRecycler.setAdapter(mOrderDetailAdapter);
     }
 
@@ -109,9 +107,9 @@ public class OrderDetailListView extends LinearLayout {
             @Override
             public void setData(OrderBean orderBean) {
                 super.setData(orderBean);
-                mNameText.setText(orderBean.getName());
-                mAccountText.setText("x" + String.valueOf(orderBean.getAccount()));
-                mPriceText.setText("￥" + String.valueOf(orderBean.getPrice()));
+//                mNameText.setText(orderBean.getName());
+//                mAccountText.setText("x" + String.valueOf(orderBean.getAccount()));
+//                mPriceText.setText("￥" + String.valueOf(orderBean.getPrice()));
                 mDeleteBtn.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -126,18 +124,18 @@ public class OrderDetailListView extends LinearLayout {
      * 暂时生成订单详情数据列表
      */
 
-    private ArrayList<OrderBean> generateList() {
-        ArrayList<OrderBean> orderList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            OrderBean orderBean = new OrderBean();
-            orderBean.setGoodsID(String.valueOf(i));
-            orderBean.setOrderId(String.valueOf(i));
-            orderBean.setName("苹果");
-            orderBean.setAccount(1);
-            orderBean.setPrice(i);
-            orderList.add(orderBean);
-        }
-        return orderList;
-    }
+//    private ArrayList<OrderBean> generateList() {
+//        ArrayList<OrderBean> orderList = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            OrderBean orderBean = new OrderBean();
+//            orderBean.setGoodsID(String.valueOf(i));
+//            orderBean.setOrderId(String.valueOf(i));
+//            orderBean.setName("苹果");
+//            orderBean.setAccount(1);
+//            orderBean.setPrice(i);
+//            orderList.add(orderBean);
+//        }
+//        return orderList;
+//    }
 }
 

@@ -1,4 +1,8 @@
-package com.juny.cashiersystem.bean;
+package com.juny.cashiersystem.realm.bean;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * <br> ClassName: GoodsBean
@@ -8,11 +12,12 @@ package com.juny.cashiersystem.bean;
  * <br> Date:  2018/4/8 18:16
  */
 
-public class GoodsBean {
+public class GoodsBean  extends RealmObject{
     /**
      * 商品
      */
-    private String goodsID;
+    @PrimaryKey
+    private int id;
 
     /**
      * 商品名称
@@ -29,13 +34,27 @@ public class GoodsBean {
      */
     private int inventory;
 
+    /**
+     * 商品分类
+     */
+    private CategoryBean category;
 
-    public String getGoodsID() {
-        return goodsID;
+
+    public CategoryBean getCategory() {
+        return category;
     }
 
-    public void setGoodsID(String goodsID) {
-        this.goodsID = goodsID;
+    public void setCategory(CategoryBean category) {
+        this.category = category;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

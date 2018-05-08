@@ -11,13 +11,11 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.base.AbstractCSFragment;
 import com.juny.cashiersystem.business.homepage.menbertab.contract.IMemberContract;
-import com.juny.cashiersystem.business.homepage.menbertab.model.bean.MemberBean;
 import com.juny.cashiersystem.business.homepage.menbertab.presenter.MemberListAdapter;
-import com.juny.cashiersystem.util.CSToast;
+import com.juny.cashiersystem.realm.bean.MemberBean;
 import com.juny.cashiersystem.util.ResourceUtil;
 import com.juny.cashiersystem.widget.FormsSummaryView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -72,22 +70,22 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
     protected void initView(View view) {
         super.initView(view);
         mAdapter = new MemberListAdapter(mActivity);
-        mList = generateList();
-        mAdapter.addAll(generateList());
+//        mList = generateList();
+//        mAdapter.addAll(generateList());
         mRvList.setLayoutManager(new LinearLayoutManager(mActivity));
         mRvList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // 更新选中 的状态
-                mList.get(mSelectIndex).setSelected(false); // 将上次选中的设置为未选中
-                mAdapter.update(mList.get(mSelectIndex), mSelectIndex);
-
-                mList.get(position).setSelected(true); // 新点击的设置为选中状态
-                mAdapter.update(mList.get(position), position);
-                CSToast.showToast("select" + String.valueOf(position));
-
-                mSelectIndex = position; // 记录此次选中的位置
+//                // 更新选中 的状态
+//                mList.get(mSelectIndex).setSelected(false); // 将上次选中的设置为未选中
+//                mAdapter.update(mList.get(mSelectIndex), mSelectIndex);
+//
+//                mList.get(position).setSelected(true); // 新点击的设置为选中状态
+//                mAdapter.update(mList.get(position), position);
+//                CSToast.showToast("select" + String.valueOf(position));
+//
+//                mSelectIndex = position; // 记录此次选中的位置
             }
         });
 
@@ -96,21 +94,21 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
         mViewTotalBuy.setExplainText(ResourceUtil.getString(R.string.member_buy_total));
     }
 
-    private ArrayList<MemberBean> generateList() {
-        ArrayList<MemberBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            MemberBean memberBean = new MemberBean();
-            memberBean.setMemberId(String.valueOf(i));
-            memberBean.setName("小芳");
-            memberBean.setCardNum("45454");
-            memberBean.setPhoneNum("124564234157");
-            // 默认选中第一个
-            if (i == 0) {
-                memberBean.setSelected(true);
-            }
-            memberBean.setSelected(false);
-            list.add(memberBean);
-        }
-        return list;
-    }
+//    private ArrayList<MemberBean> generateList() {
+//        ArrayList<MemberBean> list = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            MemberBean memberBean = new MemberBean();
+//            memberBean.setMemberId(String.valueOf(i));
+//            memberBean.setName("小芳");
+//            memberBean.setCardNum("45454");
+//            memberBean.setPhoneNum("124564234157");
+//            // 默认选中第一个
+//            if (i == 0) {
+//                memberBean.setSelected(true);
+//            }
+//            memberBean.setSelected(false);
+//            list.add(memberBean);
+//        }
+//        return list;
+//    }
 }

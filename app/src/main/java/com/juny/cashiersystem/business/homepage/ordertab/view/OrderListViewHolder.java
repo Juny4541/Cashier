@@ -6,8 +6,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.bean.OrderBean;
-import com.juny.cashiersystem.util.ResourceUtil;
+import com.juny.cashiersystem.realm.bean.OrderBean;
 
 /**
  * <br> ClassName:
@@ -44,17 +43,17 @@ public class OrderListViewHolder extends BaseViewHolder<OrderBean> {
     @Override
     public void setData(OrderBean data) {
         super.setData(data);
-        mDate.setText(data.getDate());
-        mOrderNum.setText(data.getOrderId());
-        mAmount.setText(String.valueOf(data.getAmount()));
-        mMember.setText(data.getMemberBuyer());
-        mRemark.setText(data.getRemark());
-
-        //设置选中与未选中状态
-        if (data.getSelected()) {
-            mLlOrderItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_head));
-        } else {
-            mLlOrderItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_content));
-        }
+//        mDate.setText(data.getDate());
+//        mOrderNum.setText(data.getOrderId());
+//        mAmount.setText(String.valueOf(data.getAmount()));
+//        mMember.setText(data.getMemberBuyer());
+//        mRemark.setText(data.getRemark());
+//
+//        //设置选中与未选中状态
+//        if (data.getSelected()) {
+//            mLlOrderItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_head));
+//        } else {
+//            mLlOrderItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_content));
+//        }
     }
 }

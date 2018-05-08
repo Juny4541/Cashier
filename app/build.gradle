@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    realm {
+        syncEnabled = true;
+    }
 }
 
 dependencies {
@@ -30,4 +34,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'com.jude:easyrecyclerview:4.4.0'
+
+    // Stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }

@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.business.homepage.menbertab.model.bean.MemberBean;
 import com.juny.cashiersystem.business.homepage.menbertab.view.MemberViewHolder;
+import com.juny.cashiersystem.realm.bean.MemberBean;
 
 /**
  * <br> ClassName: MemberListAdapter

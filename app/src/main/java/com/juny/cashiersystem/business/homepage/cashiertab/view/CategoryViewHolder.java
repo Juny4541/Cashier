@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.bean.CategoryBean;
+import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.util.ResourceUtil;
 
 /**
