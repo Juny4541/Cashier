@@ -1,40 +1,20 @@
 package com.juny.cashiersystem.realm.bean;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
- * <br> ClassName:
- * <br> Description:  商品类别
+ * <br> ClassName: CategorySimpleBean
+ * <br> Description:  TODO 写说明
  * <br>
  * <br> Author:  chenrunfang
- * <br> Date:  2018/4/8 22:09
+ * <br> Date:  2018/5/11 20:21
  */
 
-public class CategoryBean extends RealmObject {
+public class CategorySimpleBean {
 
-    @PrimaryKey
     private int id;
 
     private String categoryName;
 
     private boolean isSelect;
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public boolean getSelect() {
-        return isSelect;
-    }
-
-    public void setSelect(boolean select) {
-        isSelect = select;
-    }
 
     public int getId() {
         return id;
@@ -44,7 +24,19 @@ public class CategoryBean extends RealmObject {
         this.id = id;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public boolean isSelect() {
         return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 }

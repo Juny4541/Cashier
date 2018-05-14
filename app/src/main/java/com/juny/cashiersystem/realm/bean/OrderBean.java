@@ -3,7 +3,6 @@ package com.juny.cashiersystem.realm.bean;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 /**
  * <br> ClassName: OrderBean
@@ -55,7 +54,7 @@ public class OrderBean extends RealmObject {
     /**
      * 购买的商品
      */
-    private RealmList<GoodsBean> goods;
+    private RealmList<OrderGoodsBean> goods;
 
 
     public int getId() {
@@ -114,11 +113,11 @@ public class OrderBean extends RealmObject {
         this.member = member;
     }
 
-    public RealmList<GoodsBean> getGoods() {
+    public RealmList<OrderGoodsBean> getGoods() {
         return goods;
     }
 
-    public void setGoods(RealmList<GoodsBean> goods) {
+    public void setGoods(RealmList<OrderGoodsBean> goods) {
         this.goods = goods;
     }
 }

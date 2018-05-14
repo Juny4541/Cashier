@@ -22,44 +22,37 @@
         android:paddingRight="5dp">
 
         <TextView
+            android:id="@+id/tv_order_member_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/cashier_order_num"
+            android:drawableRight="@mipmap/ic_add"
+            android:gravity="center"
+            android:text="@string/cashier_order_member"
             android:textColor="@android:color/black"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv_order_num"
+            android:id="@+id/tv_order_member_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="001"
             android:textColor="@android:color/black"
             android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_order_member"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end|center_vertical"
-            android:gravity="center_vertical"
-            android:paddingRight="15dp"
-            android:text="@string/cashier_order_member"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/tv_order_remark"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
+            android:drawableRight="@mipmap/ic_add"
             android:gravity="center_vertical"
             android:paddingRight="15dp"
             android:text="@string/cashier_order_remark"
             android:textColor="@android:color/black"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            />
     </LinearLayout>
 
     <!--列表-->
@@ -95,12 +88,11 @@
             android:background="@android:color/white"
             android:gravity="end|center_vertical"
             android:paddingRight="20dp"
-            android:text="￥ 230"
+            android:text="￥ 0"
             android:textColor="@color/theme_red"
             android:textSize="20sp"
             android:textStyle="bold"
             />
-
     </LinearLayout>
 
 </LinearLayout>

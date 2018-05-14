@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <!--DialogFragment 在子布局中确定宽度-->
+    <EditText
+        android:id="@+id/et_cashier_goods_add_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:hint="输入商品名称"
+        android:inputType="text"
+        android:maxLength="10"
+        />
+
+    <EditText
+        android:id="@+id/et_cashier_goods_price"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:hint="输入商品名称"
+        android:inputType="number"
+        android:maxLength="20"
+        />
+
+    <EditText
+        android:id="@+id/et_cashier_goods_repertory"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:hint="输入库存"
+        android:inputType="number"
+        android:maxLength="20"
+        />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_ok"
+            android:textSize="@dimen/cs_sp_20"
+            />
+
+        <View
+            android:layout_width="@dimen/cs_dp_01"
+            android:layout_height="match_parent"
+            android:background="@color/gray_line"/>
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_cancel"
+            android:textSize="@dimen/cs_sp_20"
+            />
+    </LinearLayout>
+
+</LinearLayout>

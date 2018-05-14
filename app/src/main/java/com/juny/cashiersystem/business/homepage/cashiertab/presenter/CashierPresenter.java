@@ -1,7 +1,15 @@
 package com.juny.cashiersystem.business.homepage.cashiertab.presenter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import com.juny.cashiersystem.base.BasePresenter;
 import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierContract;
+import com.juny.cashiersystem.business.homepage.cashiertab.model.CashierRepository;
+import com.juny.cashiersystem.realm.bean.CategoryBean;
+import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.widget.AddDialog;
 
 /**
  * <br> ClassName:
@@ -13,8 +21,91 @@ import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierCont
 
 public class CashierPresenter extends BasePresenter<ICashierContract.IView>
         implements ICashierContract.IPresenter {
-    @Override
-    public void getMessageDatas() {
+    public final static int DIALOG_TYPE_GOODS_DELETE = 1;
+    public final static int DIALOG_TYPE_CATEGORY_DELETE = 2;
 
+    private CashierRepository mRepository;
+
+    public CashierPresenter() {
+        mRepository = new CashierRepository();
+    }
+
+    @Override
+    public void getCategoryData() {
+        if (isViewAttached()) {
+            getView().showCategoryData(mRepository.searchCategoryData());
+        }
+    }
+
+    @Override
+    public void getGoodsData(int categoryId) {
+        if (isViewAttached()) {
+            getView().showGoodsData(mRepository.searchGoodsData(categoryId));
+        }
+    }
+
+    /**
+     * <br> Description: 显示对话框
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/10 15:02
+     */
+    public void showDialog(Activity activity, int dialogType, String tag, final int categoryId) {
+        AddDialog dialog = new AddDialog();
+        dialog.setDialogType(dialogType);
+        dialog.show(activity.getFragmentManager(), tag);
+
+        dialog.setOnCashierAddListener(new AddDialog.OnCashierAddListener() {
+            @Override
+            public void onCategoryAdd(String name) {
+                CategoryBean categoryBean = new CategoryBean();
+                categoryBean.setCategoryName(name);
+                categoryBean.setSelect(false); // 默认选中状态为false
+                mRepository.addCategory(categoryBean); // 执行数据库插入
+            }
+
+            @Override
+            public void onGoodsAdd(String name, int price, int repertory) {
+                GoodsBean goodsBean = new GoodsBean();
+                goodsBean.setName(name);
+                goodsBean.setPrice(price);
+                goodsBean.setRepertory(repertory);
+                mRepository.addGoods(goodsBean, categoryId); // 执行数据库插入
+            }
+        });
+    }
+
+
+    public void showDeleteDialog(Activity activity, final int dialogType, final int id, String content) {
+        new AlertDialog.Builder(activity)
+                .setMessage(content)//设置显示的内容
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (DIALOG_TYPE_GOODS_DELETE == dialogType) {
+                            mRepository.deleteGoods(id);
+                        }
+                        if (DIALOG_TYPE_CATEGORY_DELETE == dialogType) {
+                            mRepository.deleteCategory(id);
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+
+
+    /**
+     * <br> Description: 关闭数据库相关的操作
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/10 15:44
+     */
+    public void closeRealm() {
+        mRepository.closeRealm();
     }
 }

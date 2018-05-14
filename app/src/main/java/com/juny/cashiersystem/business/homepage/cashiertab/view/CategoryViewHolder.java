@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.realm.bean.CategoryBean;
+import com.juny.cashiersystem.realm.bean.CategorySimpleBean;
 import com.juny.cashiersystem.util.ResourceUtil;
 
 /**
@@ -17,7 +17,7 @@ import com.juny.cashiersystem.util.ResourceUtil;
  * <br> Date:  2018/4/11 9:48
  */
 
-public class CategoryViewHolder extends BaseViewHolder<CategoryBean> {
+public class CategoryViewHolder extends BaseViewHolder<CategorySimpleBean> {
     private TextView mTvCategory;
 
     public CategoryViewHolder(ViewGroup parent) {
@@ -26,9 +26,9 @@ public class CategoryViewHolder extends BaseViewHolder<CategoryBean> {
     }
 
     @Override
-    public void setData(CategoryBean data) {
+    public void setData(CategorySimpleBean data) {
         super.setData(data);
-        if (data.getSelect()) {
+        if (data.isSelect()) {
             mTvCategory.setBackgroundColor(ResourceUtil.getColor(R.color.theme_red));
             mTvCategory.setTextColor(Color.WHITE);
         } else {

@@ -67,8 +67,7 @@ public class RealmHelper {
                 GoodsBean goods = realm.createObject(GoodsBean.class);
                 goods.setName(goodBean.getName());
                 goods.setPrice(goodBean.getPrice());
-                goods.setInventory(goodBean.getInventory());
-                goods.setCategory(goodBean.getCategory());
+                goods.setRepertory(goodBean.getRepertory());
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

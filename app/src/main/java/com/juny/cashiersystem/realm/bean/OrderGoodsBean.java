@@ -4,19 +4,26 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * <br> ClassName: GoodsBean
- * <br> Description: 商品实体类
+ * <br> ClassName: OrderGoodsBean
+ * <br> Description:  TODO 写说明
  * <br>
- * <br> Author: chenrunfang
- * <br> Date:  2018/4/8 18:16
+ * <br> Author:  chenrunfang
+ * <br> Date:  2018/5/13 8:56
  */
 
-public class GoodsBean extends RealmObject {
+public class OrderGoodsBean extends RealmObject {
+
+
+    @PrimaryKey
+    private int id;
     /**
      * 商品
      */
-    @PrimaryKey
-    private int id;
+    private int goodsId;
+    /**
+     * 购买数量
+     */
+    private int count;
 
     /**
      * 商品名称
@@ -28,31 +35,20 @@ public class GoodsBean extends RealmObject {
      */
     private int price;
 
-    /**
-     * 库存数量
-     */
-    private int repertory;
-
-    /**
-     * 商品分类
-     */
-    private int categoryId;
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getName() {
@@ -71,12 +67,12 @@ public class GoodsBean extends RealmObject {
         this.price = price;
     }
 
-    public int getRepertory() {
-        return repertory;
+    public int getCount() {
+        return count;
     }
 
-    public void setRepertory(int repertory) {
-        this.repertory = repertory;
+    public void setCount(int count) {
+        this.count = count;
     }
 
 }

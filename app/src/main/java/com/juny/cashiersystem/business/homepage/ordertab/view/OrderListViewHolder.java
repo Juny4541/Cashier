@@ -29,7 +29,7 @@ public class OrderListViewHolder extends BaseViewHolder<OrderBean> {
         mDate = $(R.id.tv_order_date);
         mOrderNum = $(R.id.tv_order_num);
         mAmount = $(R.id.tv_order_amout);
-        mMember = $(R.id.tv_order_member);
+        mMember = $(R.id.tv_order_member_name);
         mRemark = $(R.id.tv_order_remark);
         mLlOrderItem = $(R.id.ll_order_item);
     }

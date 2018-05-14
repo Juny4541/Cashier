@@ -31,6 +31,6 @@ public class GoodsViewHolder extends BaseViewHolder<GoodsBean> {
         super.setData(goodBean);
         name.setText(goodBean.getName());
         price.setText(String.valueOf(goodBean.getPrice()));
-        inventory.setText(String.valueOf(goodBean.getInventory()));
+        inventory.setText(String.valueOf(goodBean.getRepertory()));
     }
 }

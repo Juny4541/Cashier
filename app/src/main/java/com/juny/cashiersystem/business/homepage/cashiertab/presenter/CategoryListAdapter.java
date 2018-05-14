@@ -5,9 +5,8 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.realm.bean.CategoryBean;
-import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryFootViewHolder;
 import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryViewHolder;
+import com.juny.cashiersystem.realm.bean.CategorySimpleBean;
 
 /**
  * <br> ClassName:
@@ -17,7 +16,7 @@ import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryViewHold
  * <br> Date:  2018/4/8 18:26
  */
 
-public class CategoryListAdapter extends RecyclerArrayAdapter<CategoryBean> {
+public class CategoryListAdapter extends RecyclerArrayAdapter<CategorySimpleBean> {
     /***布局类型***/
     private static final int TYPE_FOOTER = 1;
     private static final int TYPE_ITEM = 2;
@@ -28,9 +27,6 @@ public class CategoryListAdapter extends RecyclerArrayAdapter<CategoryBean> {
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_FOOTER) {
-            return new CategoryFootViewHolder(parent);
-        }
         return new CategoryViewHolder(parent);
     }
 

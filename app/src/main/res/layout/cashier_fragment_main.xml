@@ -27,29 +27,41 @@
         android:background="@color/gray_content"
         android:orientation="vertical">
 
-        <!--顶部的tab-->
-        <com.jude.easyrecyclerview.EasyRecyclerView
-            android:id="@+id/rv_cashier_category_list"
+        <LinearLayout
+            android:id="@+id/ll_one"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/cs_dp_60"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            app:scrollbars="horizontal"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--顶部的tab-->
+            <com.jude.easyrecyclerview.EasyRecyclerView
+                android:id="@+id/rv_cashier_category_list"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/cs_dp_60"
+                android:layout_weight="1"
+                app:scrollbars="horizontal"/>
+
+            <ImageView
+                android:id="@+id/iv_cashier_add_category"
+                android:layout_width="@dimen/cs_dp_60"
+                android:layout_height="@dimen/cs_dp_60"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/cashier_ic_add_category"/>
+        </LinearLayout>
 
         <!--分割线-->
         <View
             android:id="@+id/view_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/cs_dp_001"
-            android:layout_below="@+id/rv_cashier_category_list"
+            android:layout_below="@+id/ll_one"
             android:background="@color/gray_line"/>
 
         <!--商品列表-->
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/rv_cashier_goods_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/view_line"
             />
 
