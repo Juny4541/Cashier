@@ -12,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
  * <br> Date:  2018/5/8 14:08
  */
 
-public class MemberBean  extends RealmObject{
+public class MemberBean extends RealmObject {
 
     @PrimaryKey
     private int id;
@@ -30,12 +30,14 @@ public class MemberBean  extends RealmObject{
     /**
      * 会员卡号
      */
-    private int cardNum;
+    private String cardNum;
 
     /**
      * 充值总额
      */
     private int rechargeSum;
+
+    private String isSelect;
 
     /**
      * 充值列表
@@ -66,11 +68,11 @@ public class MemberBean  extends RealmObject{
         this.phone = phone;
     }
 
-    public int getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
-    public void setCardNum(int cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 
@@ -90,4 +92,11 @@ public class MemberBean  extends RealmObject{
         this.rechargeList = rechargeList;
     }
 
+    public String getSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(String select) {
+        isSelect = select;
+    }
 }

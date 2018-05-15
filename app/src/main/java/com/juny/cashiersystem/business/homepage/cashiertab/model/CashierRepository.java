@@ -87,7 +87,6 @@ public class CashierRepository implements ICashierContract.IModel {
                 // 删除商品
                 RealmResults<GoodsBean> goodsSet = realm.where(GoodsBean.class).equalTo("categoryId", categoryId).findAll();
                 goodsSet.deleteAllFromRealm();
-
             }
         });
     }

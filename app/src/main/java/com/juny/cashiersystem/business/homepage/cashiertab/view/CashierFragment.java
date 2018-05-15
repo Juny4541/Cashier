@@ -58,10 +58,17 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
     private CategoryListAdapter mCategoryAdapter;
     private GoodsListAdapter mGoodsListAdapter;
 
-    private ArrayList<GoodsBean> mCurrentGoodsList;
-    private RealmResults<GoodsBean> mGoodsRealmResults;
-
+    /**
+     *  商品数据分类列表
+     */
     private RealmResults<CategoryBean> mCategoryRealmResults;
+    /**
+     *  商品数据查询列表
+     */
+    private RealmResults<GoodsBean> mGoodsRealmResults;
+    /**
+     * 商品分类数据缓存列表
+     */
     private ArrayList<CategorySimpleBean> mCategoryList;
     /**
      * 当前选中分类
@@ -102,7 +109,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
             @Override
             public void onClick(View v) {
                 if (mCurrentCategoryId != 0) {
-                    mCashierPresenter.showDialog(mActivity, AddDialog.DIALOG_TYPE_GOODS, "goodsDialog", mCurrentCategoryId);
+                    mCashierPresenter.showAddDialog(mActivity, AddDialog.DIALOG_TYPE_GOODS, "goodsDialog", mCurrentCategoryId);
                 } else {
                     CSToast.showToast("请先添加并选择分类");
                 }
@@ -112,7 +119,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         mIvAddCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCashierPresenter.showDialog(mActivity, AddDialog.DIALOG_TYPE_CATEGORY, "categoryDialog", mCurrentCategoryId);
+                mCashierPresenter.showAddDialog(mActivity, AddDialog.DIALOG_TYPE_CATEGORY, "categoryDialog", mCurrentCategoryId);
             }
         });
     }
@@ -229,9 +236,6 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
      * <br> Date: 2018/5/11 17:54
      */
     private void initGoodsList() {
-        if (mCurrentGoodsList == null) {
-            mCurrentGoodsList = new ArrayList<>();
-        }
         mGoodsListAdapter = new GoodsListAdapter(mActivity);
         mRvGoodsList.setLayoutManager(new GridLayoutManager(mActivity, 6)); // 6是指列数
         mRvGoodsList.setAdapter(mGoodsListAdapter);
@@ -246,14 +250,14 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         mGoodsListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                updateOrder(mCurrentGoodsList.get(position));
+                updateOrder(mGoodsRealmResults.get(position));
             }
         });
         mGoodsListAdapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(int position) {
                 mCashierPresenter.showDeleteDialog(mActivity, DIALOG_TYPE_GOODS_DELETE,
-                        mCurrentGoodsList.get(position).getId(), "确定删除该商品？");
+                        mGoodsRealmResults.get(position).getId(), "确定删除该商品？");
                 return false;
             }
         });
@@ -270,15 +274,8 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
      */
     @Override
     public void showGoodsData(RealmResults<GoodsBean> goodsRealmResults) {
-        if (mCurrentGoodsList != null && mCurrentGoodsList.size() > 0) {
-            mCurrentGoodsList.clear();
-        }
         mGoodsRealmResults = goodsRealmResults;
-        for (int i = 0; i < mGoodsRealmResults.size(); i++) {
-            mCurrentGoodsList.add(mGoodsRealmResults.get(i));
-        }
-        mGoodsListAdapter.addAll(mCurrentGoodsList);
-
+        mGoodsListAdapter.addAll(mGoodsRealmResults);
         // 添加更新监听
         mGoodsRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<GoodsBean>>() {
             @Override
@@ -289,21 +286,13 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
                 // 插入
                 if (insertIndexes.length > 0) {
                     for (int i = 0; i < insertIndexes.length; i++) {
-                        GoodsBean goodsBean = new GoodsBean();
-                        goodsBean.setName(collection.get(insertIndexes[i]).getName());
-                        goodsBean.setPrice(collection.get(insertIndexes[i]).getPrice());
-                        goodsBean.setCategoryId(collection.get(insertIndexes[i]).getCategoryId());
-                        goodsBean.setRepertory(collection.get(insertIndexes[i]).getRepertory());
-                        goodsBean.setId(collection.get(insertIndexes[i]).getId());
-                        mGoodsListAdapter.add(goodsBean);
-                        mCurrentGoodsList.add(goodsBean);
+                        mGoodsListAdapter.add(collection.get(insertIndexes[i]));
                     }
                 }
 
                 // 删除
                 if (deleteIndexes.length > 0) {
                     for (int i = 0; i < deleteIndexes.length; i++) {
-                        mCurrentGoodsList.remove(deleteIndexes[i]);
                         mGoodsListAdapter.remove(deleteIndexes[i]);
                     }
                 }
@@ -312,9 +301,9 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
     }
 
     /**
-     *<br> Description: 更新订单列表
-     *<br> Author: chenrunfang
-     *<br> Date: 2018/5/13 10:37
+     * <br> Description: 更新订单列表
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/13 10:37
      */
     private void updateOrder(GoodsBean goodsBean) {
         mOlOrderView.updateGoodsList(goodsBean);

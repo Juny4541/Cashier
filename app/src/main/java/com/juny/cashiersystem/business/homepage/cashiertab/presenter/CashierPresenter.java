@@ -45,13 +45,13 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
     }
 
     /**
-     * <br> Description: 显示对话框
+     * <br> Description: 显示插入商品数据对话框
      * <br> Author: chenrunfang
      * <br> Date: 2018/5/10 15:02
      */
-    public void showDialog(Activity activity, int dialogType, String tag, final int categoryId) {
+    public void showAddDialog(Activity activity, int dialogType, String tag, final int categoryId) {
         AddDialog dialog = new AddDialog();
-        dialog.setDialogType(dialogType);
+        dialog.setDialogType(dialogType); // 需要先设置对话框的类型，再显示， 才能显示相应的自定义布局
         dialog.show(activity.getFragmentManager(), tag);
 
         dialog.setOnCashierAddListener(new AddDialog.OnCashierAddListener() {
@@ -97,7 +97,6 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
                     }
                 }).show();
     }
-
 
 
     /**

@@ -21,13 +21,13 @@ public class TimeUtil {
      */
     public static String getStringToday() {
         long time = System.currentTimeMillis();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
         Date d1 = new Date(time);
         return format.format(d1);
     }
 
     /**
-     * <br> Description: 得到日期
+     * <br> Description: 得到日期时间
      * <br> Author: chenrunfang
      * <br> Date: 2018/5/12 22:16
      *
