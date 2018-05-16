@@ -81,7 +81,7 @@ public class AddDialog extends DialogFragment {
                 break;
             case DIALOG_TYPE_RECHARGE:
                 view = inflater.inflate(R.layout.member_add_dialog, container, false);
-                intiRechargeDialog(view);
+                initRechargeDialog(view);
                 break;
             default:
                 view = null;
@@ -203,7 +203,7 @@ public class AddDialog extends DialogFragment {
         });
     }
 
-    private void intiRechargeDialog(View view) {
+    private void initRechargeDialog(View view) {
         final EditText money = view.findViewById(R.id.et_member_add_name);
         final EditText remark = view.findViewById(R.id.et_member_phone);
         TextView ok = view.findViewById(R.id.tv_ok);

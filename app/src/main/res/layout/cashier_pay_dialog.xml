@@ -170,6 +170,7 @@
             android:layout_below="@+id/tv_cashier_pay_sum_money" />
 
         <Button
+            android:id="@+id/btn_cashier_pay_ok"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"

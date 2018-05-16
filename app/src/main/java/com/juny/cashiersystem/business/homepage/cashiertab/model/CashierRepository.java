@@ -1,12 +1,14 @@
 package com.juny.cashiersystem.business.homepage.cashiertab.model;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.juny.cashiersystem.CSApplication;
 import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierContract;
 import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
 
+import io.realm.OrderedRealmCollectionSnapshot;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -42,7 +44,7 @@ public class CashierRepository implements ICashierContract.IModel {
             public void execute(@NonNull Realm realm) {
                 CategoryBean category = realm.createObject(CategoryBean.class, (int) System.currentTimeMillis());
                 category.setCategoryName(categoryBean.getCategoryName());
-                category.setSelect(false); // 默认被选中的状态为 false
+                category.setSelect("false"); // 默认被选中的状态为 false
             }
         });
     }
@@ -90,6 +92,33 @@ public class CashierRepository implements ICashierContract.IModel {
             }
         });
     }
+
+    /**
+     * <br> Description: 更新会员信息
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/15 11:04
+     */
+    public CategoryBean updateCategorySelected(int categoryId, String isSelect) {
+        // 先查询
+        RealmResults<CategoryBean> all = mRealm.where(CategoryBean.class)
+                .equalTo("id", categoryId)
+                .findAll();
+        // 更新
+        mRealm.beginTransaction();
+        OrderedRealmCollectionSnapshot<CategoryBean> menSnapshot = all.createSnapshot();
+        for (int i = 0; i < menSnapshot.size(); i++) {
+            if (!TextUtils.isEmpty(isSelect)) {
+                menSnapshot.get(i).setSelect(isSelect);
+            }
+        }
+        mRealm.commitTransaction();
+
+        if (all.get(0).getId() == categoryId) {
+            return all.get(0);
+        }
+        return null;
+    }
+
 
     /**
      * <br> Description: 关闭数据库的相关操作

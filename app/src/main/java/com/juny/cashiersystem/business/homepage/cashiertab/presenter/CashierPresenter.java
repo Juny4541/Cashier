@@ -59,7 +59,7 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
             public void onCategoryAdd(String name) {
                 CategoryBean categoryBean = new CategoryBean();
                 categoryBean.setCategoryName(name);
-                categoryBean.setSelect(false); // 默认选中状态为false
+                categoryBean.setSelect("false"); // 默认选中状态为false
                 mRepository.addCategory(categoryBean); // 执行数据库插入
             }
 
@@ -75,6 +75,12 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
     }
 
 
+
+    /**
+     *<br> Description: 显示删除对话框
+     *<br> Author: chenrunfang
+     *<br> Date: 2018/5/16 17:06
+     */
     public void showDeleteDialog(Activity activity, final int dialogType, final int id, String content) {
         new AlertDialog.Builder(activity)
                 .setMessage(content)//设置显示的内容
@@ -98,6 +104,15 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
                 }).show();
     }
 
+
+    /**
+     * <br> Description: 更新会员信息
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/15 11:04
+     */
+    public CategoryBean updateCategorySelected(int categoryId, String isSelect){
+        return mRepository.updateCategorySelected(categoryId,isSelect);
+    }
 
     /**
      * <br> Description: 关闭数据库相关的操作

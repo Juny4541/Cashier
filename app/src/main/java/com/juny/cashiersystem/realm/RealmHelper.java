@@ -93,7 +93,7 @@ public class RealmHelper {
             public void execute(@NonNull Realm realm) {
                 CategoryBean category = realm.createObject(CategoryBean.class);
                 category.setCategoryName(categoryBean.getCategoryName());
-                category.setSelect(false); // 默认被选中的状态为 false
+                category.setSelect("false"); // 默认被选中的状态为 false
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

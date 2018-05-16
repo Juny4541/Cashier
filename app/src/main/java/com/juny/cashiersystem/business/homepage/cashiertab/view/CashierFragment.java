@@ -15,7 +15,6 @@ import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CashierPres
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CategoryListAdapter;
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.GoodsListAdapter;
 import com.juny.cashiersystem.realm.bean.CategoryBean;
-import com.juny.cashiersystem.realm.bean.CategorySimpleBean;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
 import com.juny.cashiersystem.util.CSToast;
 import com.juny.cashiersystem.util.UiUtil;
@@ -59,25 +58,18 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
     private GoodsListAdapter mGoodsListAdapter;
 
     /**
-     *  商品数据分类列表
+     * 商品数据分类列表
      */
     private RealmResults<CategoryBean> mCategoryRealmResults;
     /**
-     *  商品数据查询列表
+     * 商品数据查询列表
      */
     private RealmResults<GoodsBean> mGoodsRealmResults;
-    /**
-     * 商品分类数据缓存列表
-     */
-    private ArrayList<CategorySimpleBean> mCategoryList;
+
     /**
      * 当前选中分类
      */
-    private int mCurrentSelectIndex;
-    /**
-     * 上一个选中分类
-     */
-    private int mOldSelectIndex;
+    private int mCurrentSelectIndex = 0;
 
     /**
      * 当前分类的id
@@ -130,9 +122,6 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
      * <br> Date: 2018/5/11 17:54
      */
     private void initCategoryList() {
-        if (mCategoryList == null) {
-            mCategoryList = new ArrayList<>();
-        }
         mCategoryAdapter = new CategoryListAdapter(mActivity);
         mRvCategoryList.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         mRvCategoryList.setAdapter(mCategoryAdapter);
@@ -141,21 +130,20 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
         mCategoryAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // 更新顶部tab 的状态
-                mCategoryList.get(mCurrentSelectIndex).setSelect(false); // 将上次选中的设置为未选中
-                mCategoryAdapter.update(mCategoryList.get(mCurrentSelectIndex), mCurrentSelectIndex);
+                // 将上次选中的设置为未选中
+                mCategoryAdapter.update(mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(mCurrentSelectIndex).getId(), "false"), mCurrentSelectIndex);
 
-                mCategoryList.get(position).setSelect(true); // 新点击的设置为选中状态
-                mCategoryAdapter.update(mCategoryList.get(position), position);
+                // 新点击的设置为选中状态
+                CategoryBean categoryBean = mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(position).getId(), "true");
+                if (categoryBean != null) {
+                    mCategoryAdapter.update(categoryBean, position);
+                    // 记录此次选中的位置
+                    mCurrentSelectIndex = position;
+                    mCurrentCategoryId = categoryBean.getId();
 
-                mOldSelectIndex = mCurrentSelectIndex;
-                mCurrentSelectIndex = position; // 记录此次选中的位置
-                mCurrentCategoryId = mCategoryList.get(mCurrentSelectIndex).getId();
-
-
-                if (mOldSelectIndex != mCurrentSelectIndex) { // 防止重复点击
+                    // 更新商品列表
                     mGoodsListAdapter.clear();
-                    mCashierPresenter.getGoodsData(mCurrentCategoryId); // 查询当前分类的数据，并回调显示
+                    mCashierPresenter.getGoodsData(mCurrentCategoryId);
                 }
             }
         });
@@ -164,7 +152,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
             @Override
             public boolean onItemLongClick(int position) {
                 mCashierPresenter.showDeleteDialog(mActivity, DIALOG_TYPE_CATEGORY_DELETE,
-                        mCategoryList.get(position).getId(), "确定删除该商品");
+                        mCategoryRealmResults.get(position).getId(), "确定删除该商品");
                 return false;
             }
         });
@@ -180,28 +168,14 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
      */
     @Override
     public void showCategoryData(RealmResults<CategoryBean> categoryResults) {
-        if (mCategoryList == null) {
-            mCategoryList = new ArrayList<>();
-        }
         mCategoryRealmResults = categoryResults;
-
+        // 初次打开显示选中状态的会员信息
         for (int i = 0; i < mCategoryRealmResults.size(); i++) {
-            CategorySimpleBean bean = new CategorySimpleBean();
-            bean.setCategoryName(mCategoryRealmResults.get(i).getCategoryName());
-            bean.setSelect(mCategoryRealmResults.get(i).getSelect());
-            bean.setId(mCategoryRealmResults.get(i).getId());
-
-            // 设置默认选中的分类
-            if (i == 0) {
-                mCurrentCategoryId = bean.getId();
-                bean.setSelect(true);
-                mCurrentSelectIndex = 0;
+            if ("true".equals(mCategoryRealmResults.get(i).getSelect())) {
+                mCurrentCategoryId = mCategoryRealmResults.get(i).getId();
             }
-
-            mCategoryList.add(bean);
         }
-
-        mCategoryAdapter.addAll(mCategoryList);
+        mCategoryAdapter.addAll(mCategoryRealmResults);
 
         mCategoryRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<CategoryBean>>() {
             @Override
@@ -211,19 +185,13 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
 
                 if (insertIndexes.length > 0) {
                     for (int i = 0; i < insertIndexes.length; i++) {
-                        CategorySimpleBean bean = new CategorySimpleBean();
-                        bean.setCategoryName(collection.get(insertIndexes[i]).getCategoryName());
-                        bean.setSelect(collection.get(insertIndexes[i]).getSelect());
-                        bean.setId(collection.get(insertIndexes[i]).getId());
-                        mCategoryAdapter.add(bean);
-                        mCategoryList.add(bean);
+                        mCategoryAdapter.add(collection.get(insertIndexes[i]));
                     }
                 }
 
                 if (deleteIndexes.length > 0) {
-                    for (int i = 0; i < insertIndexes.length; i++) {
-                        mCategoryAdapter.remove(insertIndexes[i]);
-                        mCategoryList.remove(insertIndexes[i]);
+                    for (int i = 0; i < deleteIndexes.length; i++) {
+                        mCategoryAdapter.remove(deleteIndexes[i]);
                     }
                 }
             }

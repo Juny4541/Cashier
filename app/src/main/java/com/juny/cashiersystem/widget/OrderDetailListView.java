@@ -19,14 +19,12 @@ import android.widget.Toast;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.CSApplication;
 import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
 import com.juny.cashiersystem.realm.bean.OrderBean;
 import com.juny.cashiersystem.realm.bean.OrderGoodsBean;
 import com.juny.cashiersystem.util.CSLog;
 
-import io.realm.Realm;
 import io.realm.RealmList;
 
 /**
@@ -36,13 +34,11 @@ import io.realm.RealmList;
 
 public class OrderDetailListView extends LinearLayout {
 
-    private TextView mMemberName;
     private TextView mRemarkBtn;
     private RecyclerView mOrderRecycler;
     private TextView mCommitBtn;
     private TextView mCashText;
     private TextView mMemberAddBtn;
-    private Realm mRealm;
     private Context mContext;
 
     private OrderDetailAdapter mOrderDetailAdapter;
@@ -75,7 +71,6 @@ public class OrderDetailListView extends LinearLayout {
     private void initUI(Context context) {
         LayoutInflater.from(context).inflate(R.layout.common_view_order, this);
         mOrderRecycler = findViewById(R.id.order_list);
-        mMemberName = findViewById(R.id.tv_order_num);
         mRemarkBtn = findViewById(R.id.tv_order_remark);
         mCommitBtn = findViewById(R.id.order_commit_btn);
         mCashText = findViewById(R.id.order_cash_text);
@@ -88,7 +83,6 @@ public class OrderDetailListView extends LinearLayout {
 
         mGoodsRealmList = new RealmList<>();
         mOrderBean = new OrderBean();
-        mRealm = Realm.getInstance(CSApplication.getRealmConfiguration());
     }
 
     private void initListener() {
@@ -107,7 +101,7 @@ public class OrderDetailListView extends LinearLayout {
         mCommitBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO 提交订单
+                // TODO 显示收银对话框
             }
         });
     }

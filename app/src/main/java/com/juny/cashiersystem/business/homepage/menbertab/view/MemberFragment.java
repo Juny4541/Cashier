@@ -70,11 +70,14 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
      */
     private int mSelectIndex = 0;
     /**
+     *  单签选中得会员id
+     */
+    private int mCurrentMemberId;
+
+    /**
      * 缓存会员列表
      */
     private RealmResults<MemberBean> mMenberResults;
-
-    private int mCurrentMemberId;
 
     @Override
     public void onDestroy() {
@@ -110,12 +113,13 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
 
                 // 新点击的设置为选中状态
                 MemberBean memberBean = mMemberPresenter.updateMember(mMenberResults.get(position).getId(), "true");
-                mAdapter.update(memberBean, position);
-                updateMemberData(memberBean);
-
-                // 记录此次选中的位置
-                mSelectIndex = position;
-                mCurrentMemberId = memberBean.getId();
+                if (memberBean != null){
+                    mAdapter.update(memberBean, position);
+                    updateMemberData(memberBean);
+                    // 记录此次选中的位置
+                    mSelectIndex = position;
+                    mCurrentMemberId = memberBean.getId();
+                }
             }
         });
         mAdapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
@@ -145,6 +149,7 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
                 mCurrentMemberId = mMenberResults.get(i).getId();
             }
         }
+
         mAdapter.addAll(mMenberResults);
         memberList.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MemberBean>>() {
             @Override
@@ -203,5 +208,4 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
                 break;
         }
     }
-
 }

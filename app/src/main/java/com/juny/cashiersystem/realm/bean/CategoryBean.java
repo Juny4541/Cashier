@@ -18,7 +18,7 @@ public class CategoryBean extends RealmObject {
 
     private String categoryName;
 
-    private boolean isSelect;
+    private String isSelect;
 
     public String getCategoryName() {
         return categoryName;
@@ -28,11 +28,11 @@ public class CategoryBean extends RealmObject {
         this.categoryName = categoryName;
     }
 
-    public boolean getSelect() {
+    public String getSelect() {
         return isSelect;
     }
 
-    public void setSelect(boolean select) {
+    public void setSelect(String select) {
         isSelect = select;
     }
 
@@ -42,9 +42,5 @@ public class CategoryBean extends RealmObject {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public boolean isSelect() {
-        return isSelect;
     }
 }
