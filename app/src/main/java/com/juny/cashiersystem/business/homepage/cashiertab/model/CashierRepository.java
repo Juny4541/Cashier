@@ -7,6 +7,8 @@ import com.juny.cashiersystem.CSApplication;
 import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierContract;
 import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.realm.bean.MemberBean;
+import com.juny.cashiersystem.realm.bean.OrderBean;
 
 import io.realm.OrderedRealmCollectionSnapshot;
 import io.realm.Realm;
@@ -63,6 +65,35 @@ public class CashierRepository implements ICashierContract.IModel {
         });
     }
 
+    /**
+     * <br> Description: 添加订单
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 10:41
+     */
+    @Override
+    public void addOrder(final OrderBean orderBean) {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                OrderBean order = realm.createObject(OrderBean.class, (int) System.currentTimeMillis());
+                order.setOrderNum(orderBean.getOrderNum());
+                order.setAmount(orderBean.getAmount());
+                order.setPayType(orderBean.getPayType());
+                order.setRemark(orderBean.getRemark());
+                order.setDate(orderBean.getDate());
+                order.setMemberId(orderBean.getMemberId());
+                for (int i = 0; i < orderBean.getGoods().size(); i++) {
+                    order.getGoods().add(orderBean.getGoods().get(i));
+                }
+            }
+        });
+    }
+
+    /**
+     * <br> Description: 删除商品
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 16:24
+     */
     public void deleteGoods(final int goodsId) {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -103,6 +134,9 @@ public class CashierRepository implements ICashierContract.IModel {
         RealmResults<CategoryBean> all = mRealm.where(CategoryBean.class)
                 .equalTo("id", categoryId)
                 .findAll();
+        if (all.size() == 0){
+            return null;
+        }
         // 更新
         mRealm.beginTransaction();
         OrderedRealmCollectionSnapshot<CategoryBean> menSnapshot = all.createSnapshot();
@@ -112,11 +146,43 @@ public class CashierRepository implements ICashierContract.IModel {
             }
         }
         mRealm.commitTransaction();
+        return all.get(0);  // 返回查询更新结果
+    }
 
-        if (all.get(0).getId() == categoryId) {
-            return all.get(0);
+    /**
+     * <br> Description: 根据ID 查询会员
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public MemberBean searchMemberById(int memberId) {
+        // 先查询
+        RealmResults<MemberBean> all = mRealm.where(MemberBean.class)
+                .equalTo("id", memberId)
+                .findAll();
+        if (all.size() == 0) {
+            return null;
         }
-        return null;
+        return all.get(0);
+    }
+
+    /**
+     * <br> Description: 更新会员余额
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public void updateMemberBalance(MemberBean member, int newBalance) {
+        mRealm.beginTransaction();
+        member.setBalance(newBalance);
+        mRealm.commitTransaction();
+    }
+
+    /**
+     * <br> Description: 查询会员列表
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:48
+     */
+    public RealmResults<MemberBean> searchMembers() {
+        return mRealm.where(MemberBean.class).findAll();
     }
 
 

@@ -11,7 +11,7 @@ import com.juny.cashiersystem.business.homepage.ordertab.contract.IOrderContract
 import com.juny.cashiersystem.business.homepage.ordertab.presenter.OrderListAdapter;
 import com.juny.cashiersystem.realm.bean.OrderBean;
 import com.juny.cashiersystem.widget.DateSelectView;
-import com.juny.cashiersystem.widget.OrderDetailListView;
+import com.juny.cashiersystem.business.homepage.cashiertab.view.widget.OrderDetailListView;
 
 import java.util.ArrayList;
 import java.util.List;

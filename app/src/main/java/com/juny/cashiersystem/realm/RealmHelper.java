@@ -121,7 +121,6 @@ public class RealmHelper {
                 order.setOrderNum(orderBean.getOrderNum());
                 order.setAmount(orderBean.getAmount());
                 order.setRemark(orderBean.getRemark());
-                order.setMember(orderBean.getMember());
                 order.setGoods(orderBean.getGoods());
             }
         }, new Realm.Transaction.OnSuccess() {

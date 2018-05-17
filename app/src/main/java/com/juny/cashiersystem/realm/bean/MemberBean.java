@@ -37,6 +37,14 @@ public class MemberBean extends RealmObject {
      */
     private int rechargeSum;
 
+    /**
+     *  余额
+     */
+    private int balance;
+
+    /**
+     *  是否被选中
+     */
     private String isSelect;
 
     /**
@@ -98,5 +106,13 @@ public class MemberBean extends RealmObject {
 
     public void setSelect(String select) {
         isSelect = select;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

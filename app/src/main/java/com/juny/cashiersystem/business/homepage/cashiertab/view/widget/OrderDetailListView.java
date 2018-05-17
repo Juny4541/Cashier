@@ -1,5 +1,6 @@
-package com.juny.cashiersystem.widget;
+package com.juny.cashiersystem.business.homepage.cashiertab.view.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -20,12 +21,19 @@ import android.widget.Toast;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.juny.cashiersystem.R;
+import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CashierPresenter;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.realm.bean.MemberBean;
 import com.juny.cashiersystem.realm.bean.OrderBean;
 import com.juny.cashiersystem.realm.bean.OrderGoodsBean;
 import com.juny.cashiersystem.util.CSLog;
+import com.juny.cashiersystem.util.CSToast;
+import com.juny.cashiersystem.util.TimeUtil;
+
+import java.util.Random;
 
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 /**
  * 订单详情
@@ -52,6 +60,9 @@ public class OrderDetailListView extends LinearLayout {
      */
     private OrderBean mOrderBean;
 
+    private CashierPresenter mCashierPresenter;
+
+
     public OrderDetailListView(@NonNull Context context) {
         this(context, null);
     }
@@ -64,6 +75,7 @@ public class OrderDetailListView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         setOrientation(VERTICAL);
         mContext = context;
+        mCashierPresenter = new CashierPresenter();
         initUI(context);
         initListener();
     }
@@ -101,7 +113,13 @@ public class OrderDetailListView extends LinearLayout {
         mCommitBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO 显示收银对话框
+                if (mGoodsRealmList.size() > 0) {
+                    mOrderBean.setGoods(mGoodsRealmList);
+                    mOrderBean.setOrderNum(generateOrderNum());
+                    showPayDialog((Activity) getContext(), "支付对话框");
+                } else {
+                    CSToast.showToast("请先选购商品");
+                }
             }
         });
     }
@@ -166,12 +184,22 @@ public class OrderDetailListView extends LinearLayout {
      * <br> Date: 2018/5/13 15:47
      */
     public void showMemberDialog() {
-        final String[] memberIds = {"Struts2", "Spring", "Hibernate", "Mybatis", "Spring MVC"};
+        final RealmResults<MemberBean> memberResults = mCashierPresenter.getMembers();
+        final String[] memberIds = new String[memberResults.size()];
+        for (int i = 0; i < memberResults.size(); i++) {
+            memberIds[i] = memberResults.get(i).getName();
+        }
+        // 默认选中第一个会员
+        if (memberResults.size() > 0) {
+            mOrderBean.setMemberId(memberResults.get(0).getId());
+        }
         new AlertDialog.Builder(mContext)
                 .setTitle("请选择会员")
                 .setSingleChoiceItems(memberIds, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int index) {
+                        mOrderBean.setMemberId(memberResults.get(index).getId());
+                        mMemberAddBtn.setText(new StringBuffer("会员：").append(memberResults.get(index).getName()));
                     }
                 })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -215,6 +243,71 @@ public class OrderDetailListView extends LinearLayout {
                 }).show();
     }
 
+    /**
+     * <br> Description: 弹出支付会话框
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 10:33
+     */
+    private void showPayDialog(Activity activity, String tag) {
+        // 初始化dialog View
+        PayDialogFragment payDialogFragment = new PayDialogFragment();
+        if (mOrderBean.getMemberId() == 0) {
+            payDialogFragment.setData(mOrderBean.getRemark(), String.valueOf(mOrderBean.getAmount()),
+                    null, null, mOrderBean.getOrderNum());
+        } else {
+            MemberBean member = mCashierPresenter.searchMemberById(mOrderBean.getMemberId());
+            if (member != null) {
+                payDialogFragment.setData(mOrderBean.getRemark(), String.valueOf(mOrderBean.getAmount()),
+                        member.getName(), String.valueOf(member.getBalance()), mOrderBean.getOrderNum());
+            } else {
+                CSLog.logError("会员为空，数据错误");
+                return;
+            }
+        }
+        payDialogFragment.show(activity.getFragmentManager(), tag);
+        payDialogFragment.setOnCommitOrderListener(new PayDialogFragment.OnCommitOrderListener() {
+            @Override
+            public void onCommit(int payType, int payMoney) {
+                mOrderBean.setPayType(payType);
+                mOrderBean.setAmount(payMoney);
+                mOrderBean.setDate(TimeUtil.getStringDate());
+                mCashierPresenter.addOrder(mOrderBean);
+                CSToast.showToast("支付完成");
+                resetGoodsList();
+                // TODO 蓝牙打印订单信息,清空订单信息，用EventBus
+            }
+        });
+
+    }
+
+    /**
+     * <br> Description: 产生4位随机数(0000-9999)
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 10:29
+     */
+    public String generateOrderNum() {
+        Random random = new Random();
+        String fourRandom = random.nextInt(10000) + "";
+        int randLength = fourRandom.length();
+        if (randLength < 4) {
+            for (int i = 1; i <= 4 - randLength; i++)
+                fourRandom = "0" + fourRandom;
+        }
+        return TimeUtil.getStringDate() + fourRandom;
+    }
+
+    /**
+     * <br> Description: 清空重置列表
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 17:44
+     */
+    private void resetGoodsList() {
+        mOrderBean = new OrderBean();
+        mGoodsRealmList.clear();
+        mOrderDetailAdapter.clear();
+        mMemberAddBtn.setText("会员 + ");
+        mRemarkBtn.setText("备注 + ");
+    }
 
     /**
      * <br> ClassName:   OrderDetailListView

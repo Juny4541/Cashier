@@ -9,7 +9,11 @@ import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierCont
 import com.juny.cashiersystem.business.homepage.cashiertab.model.CashierRepository;
 import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.realm.bean.MemberBean;
+import com.juny.cashiersystem.realm.bean.OrderBean;
 import com.juny.cashiersystem.widget.AddDialog;
+
+import io.realm.RealmResults;
 
 /**
  * <br> ClassName:
@@ -44,6 +48,12 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
         }
     }
 
+    @Override
+    public void addOrder(OrderBean orderBean) {
+        mRepository.addOrder(orderBean);
+    }
+
+
     /**
      * <br> Description: 显示插入商品数据对话框
      * <br> Author: chenrunfang
@@ -75,11 +85,10 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
     }
 
 
-
     /**
-     *<br> Description: 显示删除对话框
-     *<br> Author: chenrunfang
-     *<br> Date: 2018/5/16 17:06
+     * <br> Description: 显示删除对话框
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/16 17:06
      */
     public void showDeleteDialog(Activity activity, final int dialogType, final int id, String content) {
         new AlertDialog.Builder(activity)
@@ -110,9 +119,37 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
      * <br> Author: chenrunfang
      * <br> Date: 2018/5/15 11:04
      */
-    public CategoryBean updateCategorySelected(int categoryId, String isSelect){
-        return mRepository.updateCategorySelected(categoryId,isSelect);
+    public CategoryBean updateCategorySelected(int categoryId, String isSelect) {
+        return mRepository.updateCategorySelected(categoryId, isSelect);
     }
+
+    /**
+     * <br> Description: 根据ID 查询会员
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public MemberBean searchMemberById(int memberId) {
+        return mRepository.searchMemberById(memberId);
+    }
+
+    /**
+     * <br> Description: 更新会员余额
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public void updateMemberBalance(MemberBean member, int newBalance) {
+        mRepository.updateMemberBalance(member, newBalance);
+    }
+
+    /**
+     * <br> Description: 查询会员列表
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:48
+     */
+    public RealmResults<MemberBean> getMembers() {
+        return mRepository.searchMembers();
+    }
+
 
     /**
      * <br> Description: 关闭数据库相关的操作

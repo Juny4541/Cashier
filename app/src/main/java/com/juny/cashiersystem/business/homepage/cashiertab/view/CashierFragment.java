@@ -14,12 +14,12 @@ import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierCont
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CashierPresenter;
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.CategoryListAdapter;
 import com.juny.cashiersystem.business.homepage.cashiertab.presenter.GoodsListAdapter;
+import com.juny.cashiersystem.business.homepage.cashiertab.view.widget.OrderDetailListView;
 import com.juny.cashiersystem.realm.bean.CategoryBean;
 import com.juny.cashiersystem.realm.bean.GoodsBean;
 import com.juny.cashiersystem.util.CSToast;
 import com.juny.cashiersystem.util.UiUtil;
 import com.juny.cashiersystem.widget.AddDialog;
-import com.juny.cashiersystem.widget.OrderDetailListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,15 +131,18 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
             @Override
             public void onItemClick(int position) {
                 // 将上次选中的设置为未选中
-                mCategoryAdapter.update(mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(mCurrentSelectIndex).getId(), "false"), mCurrentSelectIndex);
+                CategoryBean categoryBean1 = mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(mCurrentSelectIndex).getId(), "false");
+                if (categoryBean1 != null) {
+                    mCategoryAdapter.update(categoryBean1, mCurrentSelectIndex);
+                }
 
                 // 新点击的设置为选中状态
-                CategoryBean categoryBean = mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(position).getId(), "true");
-                if (categoryBean != null) {
-                    mCategoryAdapter.update(categoryBean, position);
+                CategoryBean categoryBean2 = mCashierPresenter.updateCategorySelected(mCategoryRealmResults.get(position).getId(), "true");
+                if (categoryBean2 != null) {
+                    mCategoryAdapter.update(categoryBean2, position);
                     // 记录此次选中的位置
                     mCurrentSelectIndex = position;
-                    mCurrentCategoryId = categoryBean.getId();
+                    mCurrentCategoryId = categoryBean2.getId();
 
                     // 更新商品列表
                     mGoodsListAdapter.clear();
@@ -276,6 +279,7 @@ public class CashierFragment extends AbstractCSFragment<CashierPresenter>
     private void updateOrder(GoodsBean goodsBean) {
         mOlOrderView.updateGoodsList(goodsBean);
     }
+
 
     @Override
     public void onDestroy() {

@@ -34,7 +34,7 @@ public class OrderBean extends RealmObject {
     /**
      * 备注
      */
-    private String remark;
+    private String remark="";
 
     /**
      * 生成订单的时间
@@ -49,7 +49,7 @@ public class OrderBean extends RealmObject {
     /**
      * 购买会员
      */
-    private MemberBean member;
+    private int memberId;
 
     /**
      * 购买的商品
@@ -105,12 +105,12 @@ public class OrderBean extends RealmObject {
         this.payType = payType;
     }
 
-    public MemberBean getMember() {
-        return member;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public void setMember(MemberBean member) {
-        this.member = member;
+    public void setMemberId(int member) {
+        this.memberId = member;
     }
 
     public RealmList<OrderGoodsBean> getGoods() {

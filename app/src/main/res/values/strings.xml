@@ -11,8 +11,8 @@
     <!--收银台-->
     <string name="cashier_order_detail">订单详情</string>
     <string name="cashier_order_num">订单号</string>
-    <string name="cashier_order_member">会员</string>
-    <string name="cashier_order_remark">备注</string>
+    <string name="cashier_order_member">会员 + </string>
+    <string name="cashier_order_remark">备注 + </string>
     <string name="cashier_order_complete">马上结算</string>
 
     <!--结算对话框-->
