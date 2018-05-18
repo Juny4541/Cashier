@@ -21,8 +21,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "http://10.100.11.222:8081/nexus/content/repositories/psandroid/" }
-        maven { url "http://10.100.11.222:8081/nexus/content/repositories/psandroidsnap/" }
         maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
     }
 }
