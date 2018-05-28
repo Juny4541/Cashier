@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.juny.cashiersystem.business.homepage.cashiertab.view.GoodsViewHolder;
-import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.bean.GoodsBean;
 
 /**
  * <br> ClassName:

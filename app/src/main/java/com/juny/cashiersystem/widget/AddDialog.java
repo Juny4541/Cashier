@@ -1,9 +1,10 @@
 package com.juny.cashiersystem.widget;
 
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.juny.cashiersystem.R;
+import com.juny.cashiersystem.util.CSToast;
 
 /**
  * <br> ClassName: AddDialog
@@ -29,8 +31,8 @@ public class AddDialog extends DialogFragment {
     public final static int DIALOG_TYPE_CATEGORY = 1;
     public final static int DIALOG_TYPE_GOODS = 2;
     public final static int DIALOG_TYPE_MEMBER = 3;
+    public final static int DIALOG_TYPE_RECHARGE = 4;
 
-    private Context mContext;
     /**
      * 对话框类型，默认为 CATEGORY
      */
@@ -47,6 +49,8 @@ public class AddDialog extends DialogFragment {
 
     public interface OnMemberAddListener {
         void onMemberAdd(String name, String phone);
+
+        void onRecharge(int money, String remark);
     }
 
     public void setOnCashierAddListener(OnCashierAddListener listener) {
@@ -74,6 +78,10 @@ public class AddDialog extends DialogFragment {
             case DIALOG_TYPE_MEMBER:
                 view = inflater.inflate(R.layout.member_add_dialog, container, false);
                 initMemberDialog(view);
+                break;
+            case DIALOG_TYPE_RECHARGE:
+                view = inflater.inflate(R.layout.member_add_dialog, container, false);
+                initRechargeDialog(view);
                 break;
             default:
                 view = null;
@@ -111,10 +119,16 @@ public class AddDialog extends DialogFragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(name.getText().toString())) {
+                    CSToast.showToast("名称不能为空");
+                    return;
+                }
+
                 if (mCategoryListener != null) {
                     String nameStr = name.getText().toString();
                     mCategoryListener.onCategoryAdd(nameStr);
                 }
+
                 dismiss();
             }
         });
@@ -141,12 +155,19 @@ public class AddDialog extends DialogFragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(name.getText().toString())
+                        || TextUtils.isEmpty(price.getText().toString())
+                        || TextUtils.isEmpty(repertory.getText().toString())) {
+                    CSToast.showToast("输入的内容不能为空！");
+                    return;
+                }
                 if (mCategoryListener != null) {
                     String nameStr = name.getText().toString();
                     String priceStr = price.getText().toString();
                     String repertoryStr = repertory.getText().toString();
                     mCategoryListener.onGoodsAdd(nameStr, Integer.parseInt(priceStr), Integer.parseInt(repertoryStr));
                 }
+
                 dismiss();
             }
         });
@@ -177,8 +198,36 @@ public class AddDialog extends DialogFragment {
                     String phoneStr = phone.getText().toString();
                     mMemberListener.onMemberAdd(nameStr, phoneStr);
                 }
+                dismiss();
+            }
+        });
+    }
+
+    private void initRechargeDialog(View view) {
+        final EditText money = view.findViewById(R.id.et_member_add_name);
+        final EditText remark = view.findViewById(R.id.et_member_phone);
+        TextView ok = view.findViewById(R.id.tv_ok);
+        TextView cancel = view.findViewById(R.id.tv_cancel);
+        money.setInputType(InputType.TYPE_CLASS_NUMBER);
+        money.setHint("充值金额");
+        remark.setInputType(InputType.TYPE_CLASS_TEXT);
+        remark.setHint("备注");
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMemberListener != null) {
+                    mMemberListener.onRecharge(Integer.parseInt(money.getText().toString()),
+                            remark.getText().toString());
+                }
+                dismiss();
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 }

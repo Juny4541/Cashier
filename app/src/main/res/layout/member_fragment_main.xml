@@ -41,7 +41,7 @@
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/rv_member_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/cs_dp_60"/>
 
     </FrameLayout>
@@ -74,12 +74,16 @@
                 />
 
             <TextView
-                android:id="@+id/tv_member_balance_text"
+                android:id="@+id/tv_member_recharge_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_member_balance"
                 android:layout_centerInParent="true"
-                android:text="余额"
+                android:paddingBottom="@dimen/cs_dp_10"
+                android:paddingLeft="@dimen/cs_dp_20"
+                android:paddingRight="@dimen/cs_dp_20"
+                android:paddingTop="@dimen/cs_dp_10"
+                android:text="充值"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/cs_sp_16"
                 />
@@ -88,7 +92,7 @@
                 android:id="@+id/view_line_one"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cs_dp_01"
-                android:layout_below="@+id/tv_member_balance_text"
+                android:layout_below="@+id/tv_member_recharge_btn"
                 android:layout_marginBottom="@dimen/cs_dp_5"
                 android:layout_marginLeft="@dimen/cs_dp_20"
                 android:layout_marginRight="@dimen/cs_dp_20"
@@ -101,11 +105,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view_line_one"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/cs_dp_5"
+                android:paddingBottom="@dimen/cs_dp_10"
+                android:paddingLeft="@dimen/cs_dp_20"
+                android:paddingRight="@dimen/cs_dp_20"
+                android:paddingTop="@dimen/cs_dp_10"
                 android:text="编辑"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/cs_sp_14"
                 />
+
         </RelativeLayout>
 
         <TextView
@@ -154,7 +162,7 @@
             android:layout_below="@+id/tv_member_name"
             android:layout_marginLeft="@dimen/cs_dp_50"
             android:layout_marginRight="@dimen/cs_dp_50"
-            android:layout_marginTop="@dimen/cs_dp_50"
+            android:layout_marginTop="@dimen/cs_dp_30"
             android:background="@color/gray_line"/>
 
         <com.juny.cashiersystem.widget.FormsSummaryView

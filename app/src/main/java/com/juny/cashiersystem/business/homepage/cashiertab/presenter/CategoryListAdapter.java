@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.juny.cashiersystem.business.homepage.cashiertab.view.CategoryViewHolder;
-import com.juny.cashiersystem.realm.bean.CategorySimpleBean;
+import com.juny.cashiersystem.bean.CategoryBean;
 
 /**
  * <br> ClassName:
@@ -16,7 +16,7 @@ import com.juny.cashiersystem.realm.bean.CategorySimpleBean;
  * <br> Date:  2018/4/8 18:26
  */
 
-public class CategoryListAdapter extends RecyclerArrayAdapter<CategorySimpleBean> {
+public class CategoryListAdapter extends RecyclerArrayAdapter<CategoryBean> {
     /***布局类型***/
     private static final int TYPE_FOOTER = 1;
     private static final int TYPE_ITEM = 2;

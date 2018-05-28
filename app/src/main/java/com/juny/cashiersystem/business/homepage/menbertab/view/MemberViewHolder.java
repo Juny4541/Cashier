@@ -6,7 +6,8 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.realm.bean.MemberBean;
+import com.juny.cashiersystem.bean.MemberBean;
+import com.juny.cashiersystem.util.ResourceUtil;
 
 /**
  * <br> ClassName: MemberViewHolder
@@ -31,14 +32,14 @@ public class MemberViewHolder extends BaseViewHolder<MemberBean> {
     @Override
     public void setData(MemberBean data) {
         super.setData(data);
-//        mPhoneNum.setText(data.getPhoneNum());
-//        mName.setText(data.getName());
+        mPhoneNum.setText(data.getPhone());
+        mName.setText(data.getName());
 
-//        //设置选中与未选中状态
-//        if (data.getSelected()) {
-//            mRlItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_line));
-//        } else {
-//            mRlItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_content));
-//        }
+        //设置选中与未选中状态
+        if ("true".equals(data.getSelect())) {
+            mRlItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_line));
+        } else {
+            mRlItem.setBackgroundColor(ResourceUtil.getColor(R.color.gray_content));
+        }
     }
 }

@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
-import com.juny.cashiersystem.business.homepage.formstab.model.bean.AnalyzeBean;
+import com.juny.cashiersystem.business.homepage.formstab.bean.AnalyzeBean;
 
 /**
  * <br> ClassName:

@@ -1,8 +1,9 @@
 package com.juny.cashiersystem.business.homepage.cashiertab.contract;
 
 import com.juny.cashiersystem.base.IBaseView;
-import com.juny.cashiersystem.realm.bean.CategoryBean;
-import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.bean.CategoryBean;
+import com.juny.cashiersystem.bean.GoodsBean;
+import com.juny.cashiersystem.bean.OrderBean;
 
 import io.realm.RealmResults;
 
@@ -48,6 +49,13 @@ public interface ICashierContract {
          */
         void getGoodsData(int categoryId);
 
+        /**
+         *<br> Description: 添加订单
+         *<br> Author: chenrunfang
+         *<br> Date: 2018/5/17 10:44
+         */
+        void addOrder(OrderBean orderBean);
+
     }
 
     interface IModel {
@@ -79,6 +87,13 @@ public interface ICashierContract {
          * <br> Date: 2018/5/10 15:17
          */
         void addGoods(GoodsBean goodsBean, int goodsId);
+
+        /**
+         *<br> Description: 添加订单
+         *<br> Author: chenrunfang
+         *<br> Date: 2018/5/17 10:44
+         */
+        void addOrder(OrderBean orderBean);
 
     }
 

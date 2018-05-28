@@ -7,9 +7,13 @@ import android.content.DialogInterface;
 import com.juny.cashiersystem.base.BasePresenter;
 import com.juny.cashiersystem.business.homepage.cashiertab.contract.ICashierContract;
 import com.juny.cashiersystem.business.homepage.cashiertab.model.CashierRepository;
-import com.juny.cashiersystem.realm.bean.CategoryBean;
-import com.juny.cashiersystem.realm.bean.GoodsBean;
+import com.juny.cashiersystem.bean.CategoryBean;
+import com.juny.cashiersystem.bean.GoodsBean;
+import com.juny.cashiersystem.bean.MemberBean;
+import com.juny.cashiersystem.bean.OrderBean;
 import com.juny.cashiersystem.widget.AddDialog;
+
+import io.realm.RealmResults;
 
 /**
  * <br> ClassName:
@@ -44,14 +48,20 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
         }
     }
 
+    @Override
+    public void addOrder(OrderBean orderBean) {
+        mRepository.addOrder(orderBean);
+    }
+
+
     /**
-     * <br> Description: 显示对话框
+     * <br> Description: 显示插入商品数据对话框
      * <br> Author: chenrunfang
      * <br> Date: 2018/5/10 15:02
      */
-    public void showDialog(Activity activity, int dialogType, String tag, final int categoryId) {
+    public void showAddDialog(Activity activity, int dialogType, String tag, final int categoryId) {
         AddDialog dialog = new AddDialog();
-        dialog.setDialogType(dialogType);
+        dialog.setDialogType(dialogType); // 需要先设置对话框的类型，再显示， 才能显示相应的自定义布局
         dialog.show(activity.getFragmentManager(), tag);
 
         dialog.setOnCashierAddListener(new AddDialog.OnCashierAddListener() {
@@ -59,7 +69,7 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
             public void onCategoryAdd(String name) {
                 CategoryBean categoryBean = new CategoryBean();
                 categoryBean.setCategoryName(name);
-                categoryBean.setSelect(false); // 默认选中状态为false
+                categoryBean.setSelect("false"); // 默认选中状态为false
                 mRepository.addCategory(categoryBean); // 执行数据库插入
             }
 
@@ -75,6 +85,11 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
     }
 
 
+    /**
+     * <br> Description: 显示删除对话框
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/16 17:06
+     */
     public void showDeleteDialog(Activity activity, final int dialogType, final int id, String content) {
         new AlertDialog.Builder(activity)
                 .setMessage(content)//设置显示的内容
@@ -98,6 +113,42 @@ public class CashierPresenter extends BasePresenter<ICashierContract.IView>
                 }).show();
     }
 
+
+    /**
+     * <br> Description: 更新会员信息
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/15 11:04
+     */
+    public CategoryBean updateCategorySelected(int categoryId, String isSelect) {
+        return mRepository.updateCategorySelected(categoryId, isSelect);
+    }
+
+    /**
+     * <br> Description: 根据ID 查询会员
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public MemberBean searchMemberById(int memberId) {
+        return mRepository.searchMemberById(memberId);
+    }
+
+    /**
+     * <br> Description: 更新会员余额
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:44
+     */
+    public void updateMemberBalance(MemberBean member, int newBalance) {
+        mRepository.updateMemberBalance(member, newBalance);
+    }
+
+    /**
+     * <br> Description: 查询会员列表
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/17 9:48
+     */
+    public RealmResults<MemberBean> getMembers() {
+        return mRepository.searchMembers();
+    }
 
 
     /**

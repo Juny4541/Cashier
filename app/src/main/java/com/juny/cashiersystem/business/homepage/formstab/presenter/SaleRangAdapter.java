@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.juny.cashiersystem.business.homepage.formstab.model.bean.SaleRangBean;
+import com.juny.cashiersystem.business.homepage.formstab.bean.SaleRangBean;
 import com.juny.cashiersystem.business.homepage.formstab.view.SaleRangViewHolder;
 
 /**

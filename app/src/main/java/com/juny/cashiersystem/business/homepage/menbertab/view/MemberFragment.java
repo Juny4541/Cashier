@@ -12,13 +12,19 @@ import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.base.AbstractCSFragment;
 import com.juny.cashiersystem.business.homepage.menbertab.contract.IMemberContract;
 import com.juny.cashiersystem.business.homepage.menbertab.presenter.MemberListAdapter;
-import com.juny.cashiersystem.realm.bean.MemberBean;
+import com.juny.cashiersystem.business.homepage.menbertab.presenter.MemberPresenter;
+import com.juny.cashiersystem.bean.MemberBean;
 import com.juny.cashiersystem.util.ResourceUtil;
 import com.juny.cashiersystem.widget.FormsSummaryView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.realm.OrderedCollectionChangeSet;
+import io.realm.OrderedRealmCollectionChangeListener;
+import io.realm.RealmResults;
 
 /**
  * 会员 fragment
@@ -35,7 +41,7 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
     EasyRecyclerView mRvList;
     @BindView(R.id.tv_member_balance)
     TextView mTvBalance;
-    @BindView(R.id.tv_member_balance_text)
+    @BindView(R.id.tv_member_recharge_btn)
     TextView mTvBalanceText;
     @BindView(R.id.tv_member_edit)
     TextView mTvEdit;
@@ -56,10 +62,37 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
     @BindView(R.id.tv_member_record_pay)
     TextView mTvRecordPay;
 
+    private MemberPresenter mMemberPresenter;
     private MemberListAdapter mAdapter;
 
-    private int mSelectIndex;
-    private List<MemberBean> mList;
+    /**
+     * 默认选中第一个会员
+     */
+    private int mSelectIndex = 0;
+    /**
+     *  单签选中得会员id
+     */
+    private int mCurrentMemberId;
+
+    /**
+     * 缓存会员列表
+     */
+    private RealmResults<MemberBean> mMenberResults;
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMemberPresenter.closeRealm();
+    }
+
+    @Override
+    protected List createPresenter() {
+        List<MemberPresenter> presenters = new ArrayList<>();
+        mMemberPresenter = new MemberPresenter();
+        presenters.add(mMemberPresenter);
+        return presenters;
+    }
+
 
     @Override
     protected int getContentRes() {
@@ -70,45 +103,113 @@ public class MemberFragment extends AbstractCSFragment implements IMemberContrac
     protected void initView(View view) {
         super.initView(view);
         mAdapter = new MemberListAdapter(mActivity);
-//        mList = generateList();
-//        mAdapter.addAll(generateList());
         mRvList.setLayoutManager(new LinearLayoutManager(mActivity));
         mRvList.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                // 更新选中 的状态
-//                mList.get(mSelectIndex).setSelected(false); // 将上次选中的设置为未选中
-//                mAdapter.update(mList.get(mSelectIndex), mSelectIndex);
-//
-//                mList.get(position).setSelected(true); // 新点击的设置为选中状态
-//                mAdapter.update(mList.get(position), position);
-//                CSToast.showToast("select" + String.valueOf(position));
-//
-//                mSelectIndex = position; // 记录此次选中的位置
+                // 将上次选中的设置为未选中
+                MemberBean memberBean = mMemberPresenter.updateMember(mMenberResults.get(mSelectIndex).getId(), "false");
+                if (memberBean != null){
+                    mAdapter.update(memberBean, mSelectIndex);
+                }
+
+                // 新点击的设置为选中状态
+                MemberBean currentMemberBean = mMemberPresenter.updateMember(mMenberResults.get(position).getId(), "true");
+                if (currentMemberBean != null){
+                    mAdapter.update(currentMemberBean, position);
+                    updateMemberData(currentMemberBean);
+                    // 记录此次选中的位置
+                    mSelectIndex = position;
+                    mCurrentMemberId = currentMemberBean.getId();
+                }
+            }
+        });
+        mAdapter.setOnItemLongClickListener(new RecyclerArrayAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(int position) {
+                // 长按删除
+                mMemberPresenter.showDeleteDialog(mActivity, mMenberResults.get(position).getId(), "确定删除该会员？");
+                return false;
             }
         });
 
         // 设置文案
         mViewTotalPay.setExplainText(ResourceUtil.getString(R.string.member_pay_total));
         mViewTotalBuy.setExplainText(ResourceUtil.getString(R.string.member_buy_total));
+
+        // 查询并显示会员列表信息
+        mMemberPresenter.getMemberData();
     }
 
-//    private ArrayList<MemberBean> generateList() {
-//        ArrayList<MemberBean> list = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            MemberBean memberBean = new MemberBean();
-//            memberBean.setMemberId(String.valueOf(i));
-//            memberBean.setName("小芳");
-//            memberBean.setCardNum("45454");
-//            memberBean.setPhoneNum("124564234157");
-//            // 默认选中第一个
-//            if (i == 0) {
-//                memberBean.setSelected(true);
-//            }
-//            memberBean.setSelected(false);
-//            list.add(memberBean);
-//        }
-//        return list;
-//    }
+    @Override
+    public void showMemberData(RealmResults<MemberBean> memberList) {
+        mMenberResults = memberList;
+        // 初次打开显示选中状态的会员信息
+        for (int i = 0; i < mMenberResults.size(); i++) {
+            if ("true".equals(mMenberResults.get(i).getSelect())) {
+                updateMemberData(mMenberResults.get(i));
+                mCurrentMemberId = mMenberResults.get(i).getId();
+            }
+        }
+
+        mAdapter.addAll(mMenberResults);
+        memberList.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MemberBean>>() {
+            @Override
+            public void onChange(RealmResults<MemberBean> collection, OrderedCollectionChangeSet changeSet) {
+                int[] insertIndexes = changeSet.getInsertions();
+                int[] deleteIndexes = changeSet.getDeletions();
+                // 插入
+                if (insertIndexes.length > 0) {
+                    for (int i = 0; i < insertIndexes.length; i++) {
+                        mAdapter.insert(collection.get(insertIndexes[i]), 0);
+                    }
+                }
+                // 删除
+                if (deleteIndexes.length > 0) {
+                    for (int i = 0; i < deleteIndexes.length; i++) {
+                        mAdapter.remove(deleteIndexes[i]);
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * <br> Description: 更新选被选中会员的信息
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/15 15:16
+     */
+    @Override
+    public void updateMemberData(MemberBean memberBean) {
+        mTvBalance.setText(String.valueOf(memberBean.getRechargeSum()));
+        mTvCardNum.setText(memberBean.getCardNum());
+        mTvName.setText(memberBean.getName());
+        mTvPhone.setText(memberBean.getPhone());
+        mViewTotalPay.setSumText(String.valueOf(memberBean.getRechargeSum()));
+        mViewTotalBuy.setSumText("0"); // TODO 暂时默认为零
+    }
+
+    @OnClick({R.id.iv_member_add, R.id.tv_member_edit, R.id.tv_member_record_buy,
+            R.id.tv_member_record_order, R.id.tv_member_record_pay, R.id.tv_member_recharge_btn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_member_add:
+                String cardNum = "CS888" + (mMenberResults.size() + 1); // 生成卡号：前缀+后缀
+                mMemberPresenter.showAddDialog(mActivity, "添加会员", cardNum);
+                break;
+            case R.id.tv_member_edit:
+                mMemberPresenter.showEditDialog(mActivity, "编辑会员", mCurrentMemberId);
+                break;
+            case R.id.tv_member_record_buy:
+                break;
+            case R.id.tv_member_record_order:
+                break;
+            case R.id.tv_member_record_pay:
+                break;
+            case R.id.tv_member_recharge_btn:
+                mMemberPresenter.showRechargeDialog(mActivity, "充值", mMenberResults.get(mSelectIndex));
+                break;
+        }
+    }
 }

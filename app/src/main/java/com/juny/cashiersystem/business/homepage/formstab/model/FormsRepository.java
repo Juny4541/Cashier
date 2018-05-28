@@ -11,4 +11,5 @@ import com.juny.cashiersystem.business.homepage.formstab.contract.IFormsContract
  */
 
 public class FormsRepository implements IFormsContract.IModel {
+    
 }
