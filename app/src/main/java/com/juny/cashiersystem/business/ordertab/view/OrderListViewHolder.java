@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.juny.cashiersystem.R;
+import com.juny.cashiersystem.bean.MemberBean;
 import com.juny.cashiersystem.bean.OrderBean;
 import com.juny.cashiersystem.business.cashiertab.model.CashierRepository;
 import com.juny.cashiersystem.util.ResourceUtil;
@@ -50,7 +51,10 @@ public class OrderListViewHolder extends BaseViewHolder<OrderBean> {
         mAmount.setText(String.valueOf(data.getAmount()));
         mRemark.setText(data.getRemark());
         if (data.getMemberId() != 0){
-            mMember.setText(new CashierRepository().searchMemberById(data.getMemberId()).getName());
+            MemberBean memberBean = new CashierRepository().searchMemberById(data.getMemberId());
+            if (memberBean != null){
+                mMember.setText(memberBean.getName());
+            }
         }else {
             mMember.setText("");
         }

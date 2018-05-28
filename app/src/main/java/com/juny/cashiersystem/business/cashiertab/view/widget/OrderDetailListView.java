@@ -25,10 +25,13 @@ import com.juny.cashiersystem.bean.GoodsBean;
 import com.juny.cashiersystem.bean.MemberBean;
 import com.juny.cashiersystem.bean.OrderBean;
 import com.juny.cashiersystem.bean.OrderGoodsBean;
+import com.juny.cashiersystem.bluetooh.PrintEvent;
 import com.juny.cashiersystem.business.cashiertab.presenter.CashierPresenter;
 import com.juny.cashiersystem.util.CSLog;
 import com.juny.cashiersystem.util.CSToast;
 import com.juny.cashiersystem.util.TimeUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Random;
 
@@ -133,7 +136,8 @@ public class OrderDetailListView extends LinearLayout {
                         }
                         break;
                     case OPEN_TYPE_ORDER:
-                        // TODO 打印 mOrderBean
+                        EventBus.getDefault().post(new PrintEvent(mOrderBean));
+                        CSLog.log("打印");
                         break;
                 }
             }
@@ -228,7 +232,7 @@ public class OrderDetailListView extends LinearLayout {
      */
     private void showPayDialog(Activity activity, String tag) {
         // 初始化dialog View
-       PayDialogFragment payDialogFragment = new PayDialogFragment();
+        PayDialogFragment payDialogFragment = new PayDialogFragment();
         if (mOrderBean.getMemberId() == 0) {
             payDialogFragment.setData(mOrderBean.getRemark(), String.valueOf(mOrderBean.getAmount()),
                     null, null, mOrderBean.getOrderNum());
@@ -251,12 +255,14 @@ public class OrderDetailListView extends LinearLayout {
                 mOrderBean.setAmount(payMoney);
                 mOrderBean.setDate(TimeUtil.getStringDate());
                 mCashierPresenter.addOrder(mOrderBean);
-                CSToast.showToast("支付完成");
+
+                // 打印
+                EventBus.getDefault().post(new PrintEvent(mOrderBean));
+                CSLog.log(mOrderBean.getOrderNum());
+
                 resetGoodsList();
-                // TODO 蓝牙打印订单信息,清空订单信息，用EventBus
             }
         });
-
     }
 
     /**
@@ -339,8 +345,11 @@ public class OrderDetailListView extends LinearLayout {
         }
         mCashText.setText(String.valueOf(orderBean.getAmount()));
         if (orderBean.getMemberId() != 0) {
-            mMemberAddBtn.setText(new StringBuilder("会员：")
-                    .append(mCashierPresenter.searchMemberById(orderBean.getMemberId()).getName()));
+            MemberBean memberBean = mCashierPresenter.searchMemberById(orderBean.getMemberId());
+            if (memberBean != null) {
+                mMemberAddBtn.setText(new StringBuilder("会员：")
+                        .append(memberBean.getName()));
+            }
             mRemarkBtn.setText(new StringBuilder("备注：").append(orderBean.getRemark()));
         }
     }
@@ -357,7 +366,7 @@ public class OrderDetailListView extends LinearLayout {
             mMemberAddBtn.setText("会员：");
             mMemberAddBtn.setClickable(false);
             mCommitBtn.setText("打 印");
-        }else {
+        } else {
             // 保持默认即可
         }
     }

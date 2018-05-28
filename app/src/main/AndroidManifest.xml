@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".business.homepage.main.HomeActivity"
+            android:name=".business.main.HomeActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,14 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".business.loginreg.RegisterActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".business.loginreg.LoginActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:theme="@style/dialogstyle"
-            android:name=".business.homepage.cashiertab.view.CashierPayActivity"
+            android:name=".business.cashiertab.view.CashierPayActivity"
             android:screenOrientation="landscape" />
     </application>
 

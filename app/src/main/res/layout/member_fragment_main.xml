@@ -67,7 +67,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/cs_dp_30"
                 android:paddingBottom="@dimen/cs_dp_5"
-                android:text="￥ 52024"
+                android:text="￥ 0"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/cs_sp_25"
                 android:textStyle="bold"
@@ -79,13 +79,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_member_balance"
                 android:layout_centerInParent="true"
-                android:paddingBottom="@dimen/cs_dp_10"
                 android:paddingLeft="@dimen/cs_dp_20"
                 android:paddingRight="@dimen/cs_dp_20"
-                android:paddingTop="@dimen/cs_dp_10"
                 android:text="充值"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/cs_sp_16"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 />
 
             <View
@@ -105,13 +105,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view_line_one"
                 android:layout_centerInParent="true"
-                android:paddingBottom="@dimen/cs_dp_10"
                 android:paddingLeft="@dimen/cs_dp_20"
                 android:paddingRight="@dimen/cs_dp_20"
-                android:paddingTop="@dimen/cs_dp_10"
                 android:text="编辑"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/cs_sp_14"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
                 />
 
         </RelativeLayout>
@@ -125,7 +125,6 @@
             android:layout_marginTop="@dimen/cs_dp_10"
             android:drawableLeft="@mipmap/member_ic_phone"
             android:gravity="right|center_vertical"
-            android:text="1251523456486"
             android:textSize="@dimen/cs_sp_20"
             />
 
@@ -138,7 +137,6 @@
             android:layout_marginRight="@dimen/cs_dp_50"
             android:drawableLeft="@mipmap/member_ic_card"
             android:gravity="right|center_vertical"
-            android:text="156455"
             android:textSize="@dimen/cs_sp_20"
             />
 
@@ -151,7 +149,6 @@
             android:layout_marginRight="@dimen/cs_dp_50"
             android:drawableLeft="@mipmap/member_ic_man"
             android:gravity="right|center_vertical"
-            android:text="小芳"
             android:textSize="@dimen/cs_sp_20"
             />
 

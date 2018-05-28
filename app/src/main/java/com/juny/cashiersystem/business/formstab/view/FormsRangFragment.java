@@ -17,7 +17,6 @@ import com.juny.cashiersystem.bean.OrderGoodsBean;
 import com.juny.cashiersystem.business.formstab.bean.SaleRangBean;
 import com.juny.cashiersystem.business.formstab.presenter.AnalyzeListAdapter;
 import com.juny.cashiersystem.business.formstab.presenter.SaleRangAdapter;
-import com.juny.cashiersystem.widget.DateSelectView;
 
 import java.util.ArrayList;
 
@@ -36,8 +35,8 @@ import io.realm.RealmResults;
  */
 
 public class FormsRangFragment extends Fragment {
-    @BindView(R.id.dl_forms_date_view)
-    DateSelectView mDateView;
+//    @BindView(R.id.dl_forms_date_view)
+//    DateSelectView mDateView;
     @BindView(R.id.tv_forms_row_one)
     TextView mTvRowOne;
     @BindView(R.id.tv_forms_row_two)
@@ -83,13 +82,13 @@ public class FormsRangFragment extends Fragment {
         mTvRowTwo.setText(R.string.forms_goods_sale_count);
         mTvRowThree.setText(R.string.forms_goods_sale_sum);
 
-        mDateView.setOnDateSelectListener(new DateSelectView.OnDateSelectListener() {
-            @Override
-            public void endDateSelected(String beginDate, String endDate) {
-                mAdapter.clear();
-                mAdapter.addAll(generateList(beginDate, endDate));
-            }
-        });
+//        mDateView.setOnDateSelectListener(new DateSelectView.OnDateSelectListener() {
+//            @Override
+//            public void endDateSelected(String beginDate, String endDate) {
+//                mAdapter.clear();
+//                mAdapter.addAll(generateList(beginDate, endDate));
+//            }
+//        });
     }
 
     /**

@@ -7,7 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.juny.cashiersystem.bean.OrderBean;
+import com.juny.cashiersystem.bluetooh.PrintEvent;
+import com.juny.cashiersystem.util.CSLog;
+import com.juny.cashiersystem.util.CSToast;
+
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -24,7 +31,6 @@ import butterknife.Unbinder;
 
 public abstract class AbstractCSFragment<T extends BasePresenter>
         extends AbstractMvpFragment implements IBaseView{
-
     private Unbinder mUnbinder;
     /**
      *<br> Description: 是否需要绑定EventBus 默认false
@@ -33,7 +39,7 @@ public abstract class AbstractCSFragment<T extends BasePresenter>
      *
     */
     protected boolean isRegisterEventBus() {
-        return false;
+        return true;
     }
 
     /**
@@ -47,6 +53,10 @@ public abstract class AbstractCSFragment<T extends BasePresenter>
     }
 
     protected abstract @LayoutRes int getContentRes();
+
+    protected void doPrint(OrderBean orderBean){
+
+    }
 
     protected void initView(View view) {
 
@@ -71,7 +81,6 @@ public abstract class AbstractCSFragment<T extends BasePresenter>
         registerEventBus(true);
     }
 
-
     @Override
     protected List createPresenter() {
         return null;
@@ -86,7 +95,22 @@ public abstract class AbstractCSFragment<T extends BasePresenter>
     public void dismissLoading() {
         super.dismissLoading();
     }
-
+    /**
+     *<br> Description:  打印事件
+     *<br> Author: Juny
+     *<br> Date:  2018/5/28  23:32
+     *
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPrintEvent(PrintEvent event) {
+        CSLog.log("onPrintEvent");
+        if (event.getOrderBean() == null) {
+            CSToast.showToast("订单无信息！");
+        } else {
+            doPrint(event.getOrderBean());
+            CSLog.log("订单无信息");
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -135,12 +159,6 @@ public abstract class AbstractCSFragment<T extends BasePresenter>
         }
     }
 
-
-
     @Override
-    public void displayRequestFailure(String taskId) {
-
-    }
-
-
+    public void displayRequestFailure(String taskId) {}
 }

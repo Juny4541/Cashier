@@ -35,6 +35,20 @@ public class TimeUtil {
      */
     public static String getStringDate() {
         long time = System.currentTimeMillis();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        Date d1 = new Date(time);
+        return format.format(d1);
+    }
+
+    /**
+     * <br> Description: 得到日期时间 yyyyMMdd
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/5/12 22:16
+     *
+     * @return 字符串 yyyyMMdd
+     */
+    public static String getStringOrderDate() {
+        long time = System.currentTimeMillis();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         Date d1 = new Date(time);
         return format.format(d1);

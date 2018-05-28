@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="@dimen/cs_dp_10"
-        android:text="100"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:textSize="@dimen/cs_sp_20"

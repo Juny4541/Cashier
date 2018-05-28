@@ -1,6 +1,8 @@
 package com.juny.cashiersystem.business.settingtab;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.base.AbstractCSFragment;
+import com.juny.cashiersystem.bean.OrderBean;
 import com.juny.cashiersystem.bluetooh.BluetoothUtil;
 import com.juny.cashiersystem.bluetooh.ConnectBluetoothTask;
 import com.juny.cashiersystem.util.CSToast;
@@ -28,8 +31,6 @@ public class SettingFragment extends AbstractCSFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.tv_setting_search)
     TextView mTvSearch;
-    @BindView(R.id.tv_print_btn)
-    TextView mTvPrintBtn;
 
     private DeviceListAdapter mAdapter;
     private ConnectBluetoothTask mAsyncTask;
@@ -66,16 +67,37 @@ public class SettingFragment extends AbstractCSFragment {
             }
         });
 
-        mTvPrintBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mAsyncTask == null) {
-                    CSToast.showToast("未连接打印设备！");
-                } else {
-                    mAsyncTask.doPrint();
-                }
-            }
-        });
+//        mTvPrintBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mAsyncTask == null) {
+//                    CSToast.showToast("未连接打印设备！");
+//                } else {
+//                    mAsyncTask.doPrint();
+//                }
+//            }
+//        });
+    }
+
+    /**
+     *<br> Description:  重写父类方法，打印订单信息
+     *<br> Author: Juny
+     *<br> Date:  2018/5/28  23:34
+     */
+    @Override
+    protected void doPrint(OrderBean orderBean) {
+        super.doPrint(orderBean);
+        if (mAsyncTask == null) {
+            CSToast.showToast("未连接打印设备！");
+        } else {
+            mAsyncTask.doPrint(orderBean);
+        }
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -109,5 +131,10 @@ public class SettingFragment extends AbstractCSFragment {
         if (device != null) {
             mAsyncTask = (ConnectBluetoothTask) new ConnectBluetoothTask().execute(device);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

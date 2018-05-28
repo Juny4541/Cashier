@@ -87,7 +87,6 @@ public class OrderFragment extends AbstractCSFragment implements IOrderContract.
                 }
             }
         });
-        mOrderPresenter.getOrderDatas();
 
         // 订单详情
         mOrderDetailView.setOpenType(OrderDetailListView.OPEN_TYPE_ORDER);
@@ -98,6 +97,12 @@ public class OrderFragment extends AbstractCSFragment implements IOrderContract.
                 updateList(getOrdersByDate(beginDate, endDate));
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mOrderPresenter.getOrderDatas();
     }
 
     @Override

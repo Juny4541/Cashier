@@ -6,7 +6,7 @@
               android:orientation="horizontal">
 
     <!--订单详情-->
-    <com.juny.cashiersystem.business.homepage.cashiertab.view.widget.OrderDetailListView
+    <com.juny.cashiersystem.business.cashiertab.view.widget.OrderDetailListView
         android:id="@+id/ol_cashier_order_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"

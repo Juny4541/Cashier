@@ -3,6 +3,7 @@ package com.juny.cashiersystem.widget;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,20 @@ public class DateSelectView extends LinearLayout {
 
     private final static int BEGIN_DATE = 0;
     private final static int END_DATE = 1;
-    private TextView mBeginDate;
-    private TextView mEndDate;
+    private TextView mTvBeginDate;
+    private TextView mTvEndDate;
     private Context mContext;
 
-    private DateSelectListener mDateSelectListener;
+    private OnDateSelectListener mOnDateSelectListener;
+
+    /**
+     * <br> Description: 设置监听
+     * <br> Author: chenrunfang
+     * <br> Date: 2018/4/9 18:25
+     */
+    public void setOnDateSelectListener(OnDateSelectListener listener) {
+        this.mOnDateSelectListener = listener;
+    }
 
     public DateSelectView(Context context) {
         super(context);
@@ -45,33 +55,22 @@ public class DateSelectView extends LinearLayout {
     private void init(Context context) {
         mContext = context;
         LayoutInflater.from(context).inflate(R.layout.common_date_select_view, this, true);
-//        setOrientation(HORIZONTAL);
-//        setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UiUtil.dp2px(64)));
-        mBeginDate = findViewById(R.id.tv_date_select_begin);
-        mEndDate = findViewById(R.id.tv_date_select_end);
+        mTvBeginDate = findViewById(R.id.tv_date_select_begin);
+        mTvEndDate = findViewById(R.id.tv_date_select_end);
 
-        mBeginDate.setOnClickListener(new OnClickListener() {
+        mTvBeginDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog(BEGIN_DATE);
             }
         });
 
-        mEndDate.setOnClickListener(new OnClickListener() {
+        mTvEndDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog(END_DATE);
             }
         });
-    }
-
-    /**
-     * <br> Description: 设置监听
-     * <br> Author: chenrunfang
-     * <br> Date: 2018/4/9 18:25
-     */
-    public void setDateSelectListener(DateSelectListener listener) {
-        this.mDateSelectListener = listener;
     }
 
     /**
@@ -87,16 +86,26 @@ public class DateSelectView extends LinearLayout {
                     public void onDateSet(DatePicker view, int year, int monthOfYear,
                                           int dayOfMonth) {
                         if (id == BEGIN_DATE) {
-                            String beginDate = String.valueOf(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                            mBeginDate.setText(beginDate);
-                            if (mDateSelectListener != null) {
-                                mDateSelectListener.beginDateSelected(beginDate);
+                            String beginDate;
+                            if (monthOfYear < 9) {
+                                beginDate = String.valueOf(year + "/" + "0" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            } else {
+                                beginDate = String.valueOf(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                             }
+                            mTvBeginDate.setText(beginDate);
                         } else if (id == END_DATE) {
-                            String endDate = String.valueOf(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                            mEndDate.setText(endDate);
-                            if (mDateSelectListener != null) {
-                                mDateSelectListener.endDateSelected(endDate);
+                            String endDate;
+                            if (monthOfYear < 9) {
+                                endDate = String.valueOf(year + "/" + "0" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            } else {
+                                endDate = String.valueOf(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            }
+                            mTvEndDate.setText(endDate);
+                        }
+                        if (mOnDateSelectListener != null) {
+                            if (!TextUtils.isEmpty(mTvBeginDate.getText().toString()) && !TextUtils.isEmpty(mTvEndDate.getText().toString())) {
+                                mOnDateSelectListener.endDateSelected(mTvBeginDate.getText().toString(),
+                                        mTvEndDate.getText().toString());
                             }
                         }
                     }
@@ -108,9 +117,7 @@ public class DateSelectView extends LinearLayout {
     }
 
 
-    public interface DateSelectListener {
-        void beginDateSelected(String beginDate);
-
-        void endDateSelected(String endDate);
+    public interface OnDateSelectListener {
+        void endDateSelected(String beginDate, String endDate);
     }
 }

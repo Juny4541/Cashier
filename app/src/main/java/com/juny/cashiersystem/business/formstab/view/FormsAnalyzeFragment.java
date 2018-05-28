@@ -14,7 +14,6 @@ import com.juny.cashiersystem.R;
 import com.juny.cashiersystem.bean.OrderBean;
 import com.juny.cashiersystem.business.formstab.bean.AnalyzeBean;
 import com.juny.cashiersystem.business.formstab.presenter.AnalyzeListAdapter;
-import com.juny.cashiersystem.widget.DateSelectView;
 
 import java.util.ArrayList;
 
@@ -34,8 +33,8 @@ import io.realm.RealmResults;
 
 public class FormsAnalyzeFragment extends Fragment {
 
-    @BindView(R.id.dl_forms_date_view)
-    DateSelectView mDateView;
+//    @BindView(R.id.dl_forms_date_view)
+//    DateSelectView mDateView;
     @BindView(R.id.rv_forms_analyze_list)
     EasyRecyclerView mRvList;
     Unbinder unbinder;
@@ -67,13 +66,14 @@ public class FormsAnalyzeFragment extends Fragment {
         // 初次加载全部数据
         mListAdapter.addAll(generateList());
 
-        mDateView.setOnDateSelectListener(new DateSelectView.OnDateSelectListener() {
-            @Override
-            public void endDateSelected(String beginDate, String endDate) {
-                mListAdapter.clear();
-                mListAdapter.addAll(generateList(beginDate, endDate));
-            }
-        });
+        // 暂时不根据日期筛选
+//        mDateView.setOnDateSelectListener(new DateSelectView.OnDateSelectListener() {
+//            @Override
+//            public void endDateSelected(String beginDate, String endDate) {
+//                mListAdapter.clear();
+//                mListAdapter.addAll(generateList(beginDate, endDate));
+//            }
+//        });
     }
 
 
@@ -100,7 +100,7 @@ public class FormsAnalyzeFragment extends Fragment {
             int sumMoney = 0;
             int count = 0;
             // 去重
-            for (int j = 0; j < mOrderResults.size(); j++) {
+            for (int j = 0; j < mOrderResults.size() ; j++) {
                 if (dates.get(i).equals(mOrderResults.get(j).getDate())) {
                     count++;
                     sumMoney = sumMoney + mOrderResults.get(i).getAmount();

@@ -72,7 +72,7 @@ public class HomeActivity extends AbstractCSActivity {
     private void init() {
 
         // 初始化UI
-        setSelect(CASHIER);
+        setSelect(SETTING);
 
         // 初始化监听
         mCashier.setOnClickListener(new View.OnClickListener() {
